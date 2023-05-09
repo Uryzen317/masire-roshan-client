@@ -1,0 +1,245 @@
+<div class="top-container flex flex-wrap justify-start gap-4">
+  <!-- profile image sectino -->
+  <div
+    class="profile-image p-4 w-fit border border-slate-300 shadow-md flex flex-col items-center gap-4 grow"
+  >
+    <img
+      class="w-72 aspect-square rounded-full border-8 border-slate-300
+            shadow-md"
+      *ngIf="avatar"
+      [src]="isGoogleAvatar ? avatar : environment.cdnServer + avatar"
+   />
+    <img
+      class="w-72 aspect-square rounded-full border-8 border-slate-300
+            shadow-md"
+      *ngIf="!avatar"
+      src="../../../assets/header/user-icon.png"
+    />
+    <button
+      class="border-2 border-slate-500 p-2 w-32 hover:text-white hover:bg-slate-500 transition-all duration-100 ease-in"
+      (click)="showModal.emit({ type: 'avatar-upload', data: null })"
+    >
+      تغییر تصویر
+    </button>
+  </div>
+
+  <!-- account-info section -->
+  <div
+    class="account-info p-4 border border-slate-300 shadow-md flex flex-col items-end grow"
+  >
+    <h1 class="text-lg mb-2">اطلاعات حساب</h1>
+    <div class="my-2">
+      <button
+        class="border-2 border-slate-500 p-[3px] w-fit hover:text-white hover:bg-slate-500 transition-all duration-100 ease-in mr-2 translate-y-2"
+        (click)="
+          showModal.emit({
+            type: 'change-field',
+            data: {
+              name: 'نام کاربری',
+              value: firstFieldData
+            }
+          })
+        "
+      >
+        <img class="w-6 aspect-square" src="../../../assets/panel/edit.png" />
+      </button>
+      <input
+        #firstFieldData
+        class="p-1 mr-7 outline-none border border-slate-300 w-36 sm:w-52-36 sm:w-52 w-52"
+        style="direction: rtl;"
+        id="username"
+        type="text"
+        name="username"
+        [(ngModel)]="username"
+        readonly
+      />
+      <label for="username">: نام کاربری</label>
+    </div>
+
+    <div class="my-2">
+      <button
+        class="border-2 border-slate-500 p-[3px] w-fit hover:text-white hover:bg-slate-500 transition-all duration-100 ease-in mr-2 translate-y-2"
+        *ngIf="!emailConfirmed"
+        (click)="showModal.emit({
+          type: 'confirm-field',
+          data: {
+            name: 'تایید ایمیل',
+            data: {
+              name: 'کد ارسالی به ایمیلتان را وارد کنید',
+              value: secondFieldData
+            }
+          }
+        })"
+      >
+        <img
+          class="w-6 aspect-square"
+          src="../../../assets/panel/confirm.png"
+        />
+      </button>
+      <button
+        class="border-2 border-slate-500 p-[3px] w-fit hover:text-white hover:bg-slate-500 transition-all duration-100 ease-in mr-2 translate-y-2"
+        (click)="
+          showModal.emit({
+            type: 'change-field',
+            data: {
+              name: 'ایمیل',
+              value: secondFieldData
+            }
+          })
+        "
+      >
+        <img class="w-6 aspect-square" src="../../../assets/panel/edit.png" />
+      </button>
+      <input
+        #secondFieldData
+        class="p-1 mr-[53px] outline-none border border-slate-300 w-36 sm:w-52"
+        style="direction: rtl;"
+        id="email"
+        name="email"
+        type="text"
+        [(ngModel)]="email"
+        readonly
+      />
+      <label for="email"> : ایمیل</label>
+    </div>
+
+    <div class="my-2">
+      <button
+        class="border-2 border-slate-500 p-[3px] w-fit hover:text-white hover:bg-slate-500 transition-all duration-100 ease-in mr-2 translate-y-2"
+        (click)="
+          showModal.emit({
+            type: 'change-field',
+            data: {
+              name: 'رمز عبور',
+              value: thirdFieldData
+            }
+          })
+        "
+      >
+        <img class="w-6 aspect-square" src="../../../assets/panel/edit.png" />
+      </button>
+      <input
+        #thirdFieldData
+        class="p-1 mr-10 outline-none border border-slate-300 w-36 sm:w-52"
+        style="direction: rtl;"
+        id="password"
+        name="password"
+        value="*****"
+        type="password"
+        readonly
+      />
+      <label for="password">: رمز عبور</label>
+    </div>
+
+    <div class="my-2">
+      <button
+        class="border-2 border-slate-500 p-[3px] w-fit hover:text-white hover:bg-slate-500 transition-all duration-100 ease-in mr-2 translate-y-2"
+        (click)="
+          showModal.emit({
+            type: 'change-field',
+            data: {
+              name: 'نام',
+              value: fourthFieldData
+            }
+          })
+        "
+      >
+        <img class="w-6 aspect-square" src="../../../assets/panel/edit.png" />
+      </button>
+      <input
+        #fourthFieldData
+        class="p-1 mr-[70px] outline-none border border-slate-300 w-36 sm:w-52"
+        style="direction: rtl;"
+        id="firstname"
+        type="text"
+        name="firstname"
+        [(ngModel)]="firstname"
+        placeholder="وارد نشده"
+        readonly
+      />
+      <label for="firstname">: نام</label>
+    </div>
+
+    <div class="my-2">
+      <button
+        class="border-2 border-slate-500 p-[3px] w-fit hover:text-white hover:bg-slate-500 transition-all duration-100 ease-in mr-2 translate-y-2"
+        (click)="
+          showModal.emit({
+            type: 'change-field',
+            data: {
+              name: 'نام خانوادگی',
+              value: fifthFieldData
+            }
+          })
+        "
+      >
+        <img class="w-6 aspect-square" src="../../../assets/panel/edit.png" />
+      </button>
+      <input
+        #fifthFieldData
+        class="p-1 mr-4 outline-none border border-slate-300 w-36 sm:w-52"
+        style="direction: rtl;"
+        id="lastname"
+        name="lastname"
+        type="text"
+        [(ngModel)]="lastname"
+        placeholder="وارد نشده"
+        readonly
+      />
+      <label for="lastname">: نام خانوادگی</label>
+    </div>
+
+    <div class="my-2">
+      <button
+        class="border-2 border-slate-500 p-[3px] w-fit hover:text-white hover:bg-slate-500 transition-all duration-100 ease-in mr-2 translate-y-2"
+        (click)="
+          showModal.emit({
+            type: 'change-field',
+            data: {
+              name: 'شماره تلفن',
+              value: sixthFieldData
+            }
+          })
+        "
+      >
+        <img class="w-6 aspect-square" src="../../../assets/panel/edit.png" />
+      </button>
+      <input
+        #sixthFieldData
+        class="p-1 mr-5 outline-none border border-slate-300 w-36 sm:w-52"
+        style="direction: rtl;"
+        id="number"
+        name="number"
+        type="number"
+        placeholder="وارد نشده"
+        [(ngModel)]="number"
+        readonly
+      />
+      <label for="number">: شماره تلفن</label>
+    </div>
+
+    <button
+      class="border-2 border-slate-500 p-2 w-32 hover:text-white hover:bg-slate-500 transition-all duration-100 ease-in mt-2"
+      (click)="logout()"
+    >
+      خروج از حساب
+    </button>
+  </div>
+
+</div>
+
+<!-- info page edits -->
+<app-edit *ngIf='id' [id]='id'></app-edit>
+
+<!-- charts -->
+<!-- activity list chart -->
+<div class="border border-slate-300 p-4 shadow-md mt-4">
+  <p style="direction : rtl ;" class="text-lg">گزارش فعالیت ها</p>
+  <canvas id="activityCanvas"></canvas>
+</div>
+
+<!-- last week activity chart -->
+<div class="border border-slate-300 p-4 shadow-md mt-4">
+  <p style="direction : rtl ;" class="text-lg">فعالیت های هفته گذشته</p>
+  <canvas id="weekCanvas"></canvas>
+</div>

@@ -1,0 +1,68 @@
+<div class="body-container flex justify-center">
+  <div class="main-container bg-white my-4 container shadow-2xl">
+    <!-- header -->
+    <section class="first-section relative h-screen overflow-hidden">
+      <!-- bg -->
+      <div
+        style="background-image:url('./../../assets/index/main-page.jpg')"
+        class="w-full h-full bg-cover bg-no-repeat bg-fixed bg-top"
+      ></div>
+      
+    <!-- intro -->
+    <div class="intro-container p-10 absolute top-0 right-0">
+      <h1 class="text-right text-semibold sm:text-7xl text-6xl text-white sm:mt-10 mt-6"
+        style="text-shadow: 1px 1px 4px #134e4a">
+        مسیر روشن؛ پایگاه جامع قران و احادیث
+      </h1>
+      <p class="text-right text-lg mt-10 text-white"
+        style=" text-shadow: 1px 1px 4px #134e4a">
+        مرجع جمع اوری قران ؛ ادعیه و احادیث از سراسر اینترنت
+      </p> 
+    </div>
+      
+      <div class="search-box absolute flex w-full justify-center top-3/4">
+        <div class="search-box-trace relative w-[300px] sm:w-[500px]">
+          <!-- search results -->
+          <div
+            class="res-container w-72 absolute bottom-2 left-[50%] translate-x-[-50%] flex flex-row flex-wrap items-end content-end overflow-hidden gap-2"
+            style="height: calc(calc(100vh - 25%) - 190px);"
+          >
+            <a
+              [routerLink]="['post', search._id]"
+              class="flex justify-end items-center w-full h-10 bg-white gap-2 overflow-hidden rounded-full cursor-pointer shadow-lg"
+              *ngFor="let search of searchRes"
+            >
+              <p class="text-right text-xl">{{ search.name }}</p>
+              <img
+                [src]="environment.cdnServer + search.avatar"
+                alt="والپیپر"
+                class="w-9 h-9 rounded-full mx-[2px]"
+              />
+            </a>
+          </div>
+
+          <input
+            type="text"
+            class="outline-none pr-5 pl-14 rounded-full w-[300px] sm:w-[400px] h-12 text-xl text-right placeholder:text-black opacity-90 focus:w-screen sm:focus:w-[500px] 
+            transition-all ease-out focus:opacity-100 absolute left-[50%] translate-x-[-50%] z-10 peer"
+            placeholder="... جستجو"
+            [formControl]="searchBox"
+          />
+          <img
+            src="./../../assets/index/search.svg"
+            class="absolute h-8 peer-focus:hidden sm:peer-focus:left-2 left-4 sm:left-16 top-2 animate-pulse cursor-pointer z-10 transition-all ease-out"
+          />
+          <div
+            class="bg-white h-10 w-[170px] sm:w-[220px] sm:peer-focus:w-[280px] absolute top-1 left-[65px] sm:left-[138px] sm:peer-focus:left-28 rounded-full 
+            animate-ping z-0 peer-focus:w-screen peer-focus:-left-[35px]"
+          ></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- games -->
+    <section class="mt-10">
+      <app-game-section *ngFor="let thread of threads" [thread]="thread"></app-game-section>
+    </section>
+  </div>
+</div>

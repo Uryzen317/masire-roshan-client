@@ -1,0 +1,134 @@
+<div class="main-container p-4">
+  <!-- adding new admins -->
+  <p class="text-lg text-right"> : افزودن ادمین</p>
+  <div class="name-container relative">
+    <input
+      class="p-1 mr-4 outline-none border border-slate-300 w-48"
+      type="text"
+      [formControl]="adminSearch"
+    />
+    <label for="name">: جستجوی نام ادمین</label>
+
+    <!-- search results -->
+    <table class="table-auto w-full my-4">
+      <thead>
+          <tr class="border border-slate-300">
+          <th class=" text-right p-2 border border-slate-300">
+                  مدیریت
+          </th>
+          <th class=" text-center p-2 border border-slate-300">
+              پروفایل
+          </th>
+          <th class=" text-center p-2 border border-slate-300">
+              نام
+          </th>
+          <th class="text-center p-2 border border-slate-300">
+            شماره
+          </th>
+          </tr>
+        </thead>
+  
+        <tbody>
+          <tr
+            class="border border-slate-100"
+            *ngFor="let adminList of searchResult; index as count"
+          >
+          <td
+          class="p-2 border border-slate-100 overflow-hidden flex items-center justify-evenly"
+          >
+          <button type="button">
+              <img
+              class="w-6"
+              src="../../../assets/panel/up.png"
+              (click)="admin(adminList._id)"
+              />
+          </button>
+           </td>
+               <td
+                class="p-2 border border-slate-100 overflow-hidden"
+           >
+           <img
+           class="w-8 h-8 border-2 border-slate-400 rounded-full"
+           [src]="environment.cdnServer + adminList.avatar"
+           />
+              </td>
+               <td
+                class="p-2 border border-slate-100 overflow-hidden text-center"
+           >
+               {{ adminList.username }}
+              </td>
+  
+          <td class="p-2 border border-slate-100 text-center">
+            {{ count + 1 }}
+          </td>
+          </tr>
+        </tbody>
+      </table>
+  </div>
+
+  <!-- managing admins -->
+  <p class="text-lg text-right"> : ادمین ها</p>
+    <table class="table-auto w-full">
+    <thead>
+        <tr class="border border-slate-300">
+        <th class=" text-right p-2 border border-slate-300">
+                مدیریت
+        </th>
+        <th class=" text-center p-2 border border-slate-300">
+            پروفایل
+        </th>
+        <th class=" text-center p-2 border border-slate-300">
+            نام
+        </th>
+        <th class="text-center p-2 border border-slate-300">
+          شماره
+        </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr
+          class="border border-slate-100"
+          *ngFor="let admin of admins; index as count"
+        >
+        <td
+        class="p-2 border border-slate-100 overflow-hidden flex items-center justify-evenly"
+        >
+        <button type="button">
+            <img
+            class="w-6"
+            src="../../../assets/panel/down.png"
+            (click)="deAdmin(admin._id)"
+            />
+        </button>
+        <button type="button">
+            <img
+            class="w-6"
+            src="../../../assets/panel/delete.png"
+            (click)="ban(admin._id)"
+            />
+        </button>
+         </td>
+
+
+             <td
+              class="p-2 border border-slate-100 overflow-hidden"
+         >
+         <img
+         class="w-8 h-8 border-2 border-slate-400 rounded-full"
+         [src]="environment.cdnServer + admin.avatar"
+         />
+            </td>
+             <td
+              class="p-2 border border-slate-100 overflow-hidden text-center"
+         >
+             {{ admin.username }}
+            </td>
+
+        <td class="p-2 border border-slate-100 text-center">
+          {{ count + 1 }}
+        </td>
+        </tr>
+      </tbody>
+    </table>
+</div>

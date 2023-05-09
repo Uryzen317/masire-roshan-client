@@ -1,0 +1,42 @@
+<div class="main-cotainer">
+      <!-- logs list -->
+  <p class="text-lg text-right"> : لاگ ها </p>
+  <table class="table-auto w-full">
+  <thead>
+      <tr class="border border-slate-300">
+      <th class=" text-center p-2 border border-slate-300">
+             فعالیت
+      </th>
+      <th class=" text-center p-2 border border-slate-300">
+          نام
+      </th>
+      <th class="text-center p-2 border border-slate-300">
+        شماره
+      </th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr
+        class="border border-slate-100"
+        *ngFor="let log of logs; index as count"
+      >
+           <td
+            class="p-2 border border-slate-100 overflow-hidden text-center"
+       >
+           {{ log.operation }}
+          </td>
+
+           <td
+            class="p-2 border border-slate-100 overflow-hidden text-center"
+       >
+           {{ log.username }}
+          </td>
+
+      <td class="p-2 border border-slate-100 text-center">
+        {{ count + 1 }}
+      </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

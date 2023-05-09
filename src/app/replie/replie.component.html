@@ -1,0 +1,98 @@
+<div
+    class="replie-container border p-4 text-right mt-4 shadow-md"
+>
+    <!-- header -->
+    <div
+    class="comment-header-container flex justify-end gap-4 items-center"
+    >
+        <p class="comment-date">{{data.createdAt |date}}</p>
+        <p class="comment-author text-lg cursor-pointer">
+            {{ data.author.username }}
+        </p>
+        <img
+            class="w-10 aspect-square rounded-full border-2 border-slate-500 cursor-pointer"
+            [src]="'data.author.avatar'"
+        />
+    </div>
+
+    <!-- body -->
+    <p class="comment-text my-2 text-justify" style="direction: rtl">
+    {{data.replie}}
+    </p>
+
+    <!-- details -->
+    <div class="detail-container flex justify-between">
+        <div class="comment-reactions-container flex gap-4">
+            <!-- number of replies -->
+            <div class="flex gap-1 items-center w-fit h-fit">
+                <img
+                class="w-6 cursor-pointer"
+                src="../../assets/game-section/answer.svg"
+                title="منفی"
+                (click)="data.isRepling = !data.isRepling"
+                />{{data.replies}}
+            </div>
+
+            <!-- number of dislikes -->
+            <div class="flex gap-1 items-center w-fit h-fit">
+                <img
+                class="w-6 cursor-pointer"
+                [src]="data.hasDisliked ? '../../assets/game-section/dislike-active.svg' : '../../assets/game-section/dislike.svg'"
+                title="منفی"
+                (click)="data.hasDisliked ? null : dislike(data._id)"
+                />{{data.dislikes}}
+            </div>
+
+            <!-- number of likes -->
+            <div class="flex gap-1 items-center w-fit h-fit">
+                <img
+                class="w-6 cursor-pointer"
+                [src]="data.hasLiked ? '../../assets/game-section/like-active.svg' : '../../assets/game-section/like.svg'"
+                title="مثبت"
+                (click)="data.hasLiked ? null : like(data._id)"
+                />{{data.likes}}
+            </div>
+        </div>
+        <p
+            *ngIf="data.replies && !data.areRepliesVisible"
+            class="cursor-pointer"
+            (click)="
+            data.areRepliesVisible = !data.areRepliesVisible;
+            showReplies()
+            "
+        >
+            نمایش {{ data.replies }} پاسخ
+        </p>
+        <p
+            *ngIf="data.areRepliesVisible"
+            class="cursor-pointer"
+            (click)="data.areRepliesVisible = !data.areRepliesVisible"
+        >
+            مخفی کردن {{ data.replies }} پاسخ
+        </p>
+    </div>
+
+    <!-- submig a replie -->
+    <div
+      class="write-comment border mt-4 p-4 text-right shadow-md"
+      *ngIf="data.isRepling"
+    >
+      <p class="mb-2">پاسخ دهید</p>
+      <textarea
+        class="w-full border p-4 outline-none"
+        rows="2"
+        style="direction: rtl"
+        #text
+      ></textarea>
+      <button
+        class="border-2 border-slate-500 p-1 w-16 hover:text-white hover:bg-slate-500 transition-all duration-100 ease-in"
+        (click)="comment(data._id , text.value)"
+      >
+        ثبت
+      </button>
+    </div>
+
+    <ng-container *ngIf="data.areRepliesVisible">
+        <app-replie *ngFor="let replie of data.repliesList" [data]="replie"></app-replie>
+    </ng-container>
+</div>

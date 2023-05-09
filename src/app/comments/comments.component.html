@@ -1,0 +1,131 @@
+<div class="main-container w-full px-4">
+  <!-- write comments -->
+  <div
+    class="write-comment border p-4 text-right mb-4 shadow-md"
+  >
+    <p class="text-lg mb-2">! کامنت بگذارید</p>
+    <textarea
+      class="w-full border p-4 outline-none"
+      rows="3"
+      style="direction: rtl"
+      #text
+    ></textarea>
+    <button
+      class="border-2 border-slate-500 p-1 w-16 hover:text-white hover:bg-slate-500 transition-all duration-100 ease-in"
+      (click)="comment(null, text.value)"
+    >
+      ثبت
+    </button>
+  </div>
+
+  <!-- list of replies -->
+  <app-replie *ngFor="let replie of data" [data]="replie"></app-replie>
+
+  <!-- edit this bullshit code
+  <p class="text-right mr-2 p-2" *ngIf="!canComment">
+    برای نوشتن کامنت وارد اکانت خود شوید
+  </p>
+  -->
+
+  <!-- comments
+  <div
+    *ngFor="let comment of comments"
+    class="comment border mx-4 p-4 text-right mb-4 shadow-md"
+  >
+    <div class="comment-header-container flex justify-end gap-4 items-center">
+      <p class="comment-date">{{ comment.createdAt | date }}</p>
+      <p class="comment-author text-lg cursor-pointer">
+        {{ comment.author.username }}
+      </p>
+      <img
+        class="w-10 aspect-square rounded-full border-2 border-slate-500 cursor-pointer"
+        [src]="environment.cdnServer + comment.author.avatar"
+      />
+    </div>
+    <p class="comment-text my-2 text-justify" style="direction: rtl">
+      {{ comment.comment }}
+    </p>
+    <div class="comment-reactions-container flex justify-between">
+      <div class="reactions-inner-container flex gap-4">
+        <div class="flex gap-1 items-center w-fit h-fit">
+          <img
+            class="w-6 cursor-pointer"
+            src="../../assets/game-section/answer.svg"
+            title="پاسخ"
+            (click)="comment.isRepling = !comment.isRepling"
+          />{{ comment.replies }}
+        </div>
+        <div class="flex gap-1 items-center w-fit h-fit">
+          <img
+            class="w-6 cursor-pointer"
+            [src]="
+              comment.hasDisliked
+                ? '../../assets/game-section/dislike-active.svg'
+                : '../../assets/game-section/dislike.svg'
+            "
+            title="منفی"
+            (click)="comment.hasDisliked ? null : dislike(comment._id)"
+          />{{ comment.dislikes }}
+        </div>
+        <div class="flex gap-1 items-center w-fit h-fit">
+          <img
+            class="w-6 cursor-pointer"
+            [src]="
+              comment.hasLiked
+                ? '../../assets/game-section/like-active.svg'
+                : '../../assets/game-section/like.svg'
+            "
+            title="مثبت"
+            (click)="comment.hasLiked ? null : like(comment._id)"
+          />{{ comment.likes }}
+        </div>
+      </div>
+      <p
+        *ngIf="comment.replies && !comment.areRepliesVisible"
+        class="cursor-pointer"
+        (click)="
+          comment.areRepliesVisible = !comment.areRepliesVisible;
+          showReplies(comment._id)
+        "
+      >
+        نمایش {{ comment.replies }} پاسخ
+      </p>
+      <p
+        *ngIf="comment.replies && comment.areRepliesVisible"
+        class="cursor-pointer"
+        (click)="comment.areRepliesVisible = !comment.areRepliesVisible"
+      >
+        مخفی کردن {{ comment.replies }} پاسخ
+      </p>
+    </div>
+    -->
+
+    <!-- replie
+    <div
+      class="write-comment border mt-4 p-4 text-right shadow-md"
+      *ngIf="comment.isRepling && canComment"
+    >
+      <p class="mb-2">پاسخ دهید</p>
+      <textarea
+        class="w-full border p-4 outline-none"
+        rows="2"
+        style="direction: rtl"
+        #text
+      ></textarea>
+      <button
+        class="border-2 border-slate-500 p-1 w-16 hover:text-white hover:bg-slate-500 transition-all duration-100 ease-in"
+        (click)="replie(comment._id, text.value)"
+      >
+        ثبت
+      </button>
+    </div>
+    <p class="text-right" *ngIf="comment.isRepling && !canComment">
+      برای نوشتن کامنت وارد اکانت خود شوید
+    </p>
+
+   internal comments
+   <!--
+    <app-replie *ngIf="comment.repliesList" [data]="comment.repliesList[0]"></app-replie>
+  </div>
+    -->
+</div>

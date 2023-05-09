@@ -1,0 +1,241 @@
+<header
+  class="bg-white shadow-md flex justify-center sticky top-0 h-14 z-50 px-4"
+>
+<div class="header-container flex items-center container justify-between">
+    <!-- menu -->
+    <div class="bg bg-slate-600 w-screen h-screen absolute top-14 right-0 opacity-30 transition-colors duration-100"
+    *ngIf="isMenuOpen" (click)="isMenuOpen = false;"></div>
+
+    <div class="md:hidden relative">
+
+      <img (click)="isMenuOpen = !isMenuOpen" src="../../assets/header/menu.png" class="w-10 transition-all duration-100" [class.rotate-90]="isMenuOpen">
+
+      <div class="menu-content w-48 h-fit bg-white z-50 absolute top-12 shadow-md transition-all duration-50 ease-in overflow-hidden"
+      [class.opacity-100]="isMenuOpen"
+      [class.-left-4]="isMenuOpen"
+      [class.-left-52]="!isMenuOpen" 
+      [class.opacity-100]="isMenuOpen"
+      [class.opacity-0]="!isMenuOpen"
+      >
+        <!-- navigation -->
+        <div
+            class="right-panel bg-white md:basis-1/5 h-fit md:sticky md:top-[72px] shadow-md"
+        >
+          <!-- account info -->
+          <div>
+          <!-- unregistered user icon -->
+            <div (click)="isMenuOpen = false;"
+            class="user-icon-container flex gap-2 items-center justify-end p-2"
+            *ngIf="!isLoggedIn"
+          >
+            <a [routerLink]="['panel', 'registeration', 'signup']">
+              <p
+                class="text-slate-800 hover:text-slate-400 transition-color duration-200"
+              >
+                ثبت نام
+              </p>
+            </a>
+            <p
+              class="text-slate-800 hover:text-slate-400 transition-color duration-200"
+            >
+              /
+            </p>
+            <a [routerLink]="['panel', 'registeration', 'login']">
+              <p
+                class="text-slate-800 text-lg hover:text-slate-400 transition-color duration-200"
+              >
+                وارد شوید
+              </p>
+            </a>
+            <img class="w-8 opacity-70" src="./../../assets/header/user-icon.png" />
+          </div>
+
+          <!-- registered user icon -->
+          <div (click)="isMenuOpen = false;" class="user-icon-container hover:bg-zinc-200 flex justify-end p-2 gap-1 h-fit items-center cursor-pointer"
+          *ngIf="isLoggedIn">
+
+            <a [routerLink]="['/' , 'panel']">
+              <p
+                class="text-slate-800 text-l transition-color duration-200 flex w-32 overflow-clip h-6"
+              >
+                {{ user.username }}
+              </p>
+            </a>
+            <a [routerLink]="['/' , 'panel']">
+              <img
+                class="w-8 opacity-70 ml-2 aspect-square rounded-full border-2 border-slate-300"
+                [src]="user.isGoogleAvatar ? user.avatar : environment.cdnServer + user.avatar"
+                *ngIf="user.avatar"
+              />
+              <img
+                class="w-8 opacity-70 ml-2 aspect-square rounded-full border-2 border-slate-300 "
+                src="../../assets/header/user-icon.png"
+                *ngIf="!user.avatar"
+              />
+            </a>
+          </div>
+
+          </div>
+
+          <!-- managing account -->
+          <a (click)="isMenuOpen = false;" *ngIf="regState" [routerLink]="['/' , 'panel' , 'personal-account']">
+            <div
+              class="account-info hover:bg-zinc-200 flex justify-end p-2 gap-1 h-fit items-center cursor-pointer"
+            >
+              <p class="text-slate-800">حساب کاربری</p>
+              <img class="h-6" src="../../assets/game-section/account-info.png" />
+            </div>
+          </a>
+
+          <!-- manage posts -->
+          <a (click)="isMenuOpen = false;" *ngIf="regState==='admin' || regState === 'god'" [routerLink]="['/' , 'panel' , 'posts']">
+            <div
+              class="account-info hover:bg-zinc-200 flex justify-end p-2 gap-1 h-fit items-center cursor-pointer"
+            >
+              <p class="text-slate-800">مدیریت پست ها</p>
+              <img class="h-6" src="../../assets/panel/posts.png" />
+            </div>
+          </a>
+
+          <!-- manage subjects -->
+          <a (click)="isMenuOpen = false;" *ngIf="regState==='admin' || regState === 'god'" [routerLink]="['/' , 'panel' , 'games']">
+            <div
+              class="account-info hover:bg-zinc-200 flex justify-end p-2 gap-1 h-fit items-center cursor-pointer"
+            >
+              <p class="text-slate-800">مدیریت عناوین</p>
+              <img class="h-6" src="../../assets/panel/document.png" />
+            </div>
+          </a>
+
+          <!-- manage tags -->
+          <a (click)="isMenuOpen = false;" *ngIf="regState==='admin' || regState === 'god'" [routerLink]="['/' , 'panel' , 'tags']">
+            <div
+              class="account-info hover:bg-zinc-200 flex justify-end p-2 gap-1 h-fit items-center cursor-pointer"
+            >
+              <p class="text-slate-800">مدیریت تگها</p>
+              <img class="h-6" src="../../assets/panel/tags.png" />
+            </div>
+          </a>
+
+          <!-- manage main page -->
+          <a (click)="isMenuOpen = false;" *ngIf="regState==='admin' || regState === 'god'" [routerLink]="['/' , 'panel' , 'main-page']">
+            <div
+              class="account-info hover:bg-zinc-200 flex justify-end p-2 gap-1 h-fit items-center cursor-pointer"
+            >
+              <p class="text-slate-800">صفحه اصلی</p>
+              <img class="h-6" src="../../assets/panel/home.png" />
+            </div>
+          </a>
+
+          <!-- manage logs -->
+          <a (click)="isMenuOpen = false;" *ngIf="regState==='admin' || regState === 'god'" [routerLink]="['/' , 'panel' , 'logs']">
+            <div
+              class="account-info hover:bg-zinc-200 flex justify-end p-2 gap-1 h-fit items-center cursor-pointer"
+            >
+              <p class="text-slate-800">فعالیت ها</p>
+              <img class="h-6" src="../../assets/panel/logs.png" />
+            </div>
+          </a>
+
+          <!-- manage admins -->
+          <a (click)="isMenuOpen = false;" *ngIf="regState === 'god'" [routerLink]="['/' , 'panel' , 'admins']">
+            <div
+              class="account-info hover:bg-zinc-200 flex justify-end p-2 gap-1 h-fit items-center cursor-pointer"
+            >
+              <p class="text-slate-800">مدیران</p>
+              <img class="h-6" src="../../assets/panel/admins.png" />
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- unregistered user icon -->
+    <div
+      class="user-icon-container md:flex gap-2 items-center hidden"
+      *ngIf="!isLoggedIn"
+    >
+      <a [routerLink]="['panel', 'registeration', 'signup']">
+        <p
+          class="text-slate-800 text-lg hover:text-slate-400 transition-color duration-200"
+        >
+          ثبت نام
+        </p>
+      </a>
+      <p
+        class="text-slate-800 text-lg hover:text-slate-400 transition-color duration-200"
+      >
+        /
+      </p>
+      <a [routerLink]="['panel', 'registeration', 'login']">
+        <p
+          class="text-slate-800 text-lg hover:text-slate-400 transition-color duration-200"
+        >
+          وارد شوید
+        </p>
+      </a>
+      <img class="w-10 opacity-70" src="./../../assets/header/user-icon.png" />
+    </div>
+
+    <!-- registered user icon -->
+    <div class="user-icon-container md:flex items-center hidden" *ngIf="isLoggedIn">
+      <a [routerLink]="['panel']">
+        <img
+          class="w-8 opacity-70 mr-2 aspect-square rounded-full border-2 border-slate-300 "
+          [src]="user.isGoogleAvatar ? user.avatar : environment.cdnServer + user.avatar"
+          *ngIf="user.avatar"
+        />
+        <img
+          class="w-8 opacity-70 mr-2 aspect-square rounded-full border-2 border-slate-300 "
+          src="../../assets/header/user-icon.png"
+          *ngIf="!user.avatar"
+        />
+      </a>
+
+      <a [routerLink]="['panel']">
+        <p
+          class="text-slate-800 text-lg hover:text-slate-400 transition-color duration-200 flex"
+        >
+          {{ user.username }}
+        </p>
+      </a>
+            
+      <div class="relative">
+        <img
+          class="w-6 opacity-7 cursor-pointer flex translate-all duration-100 ease-in-out"
+          src="./../../assets/header/expand-more.png"
+          [class.rotate-180]="!isFolded"
+          (click)="isFolded = !isFolded"
+        />
+        
+        <div class="absolute w-32 h-fit top-6 bg-white flex flex-col p-2 text-sm items-end border-slate-200 border shadow-md3 space-y-2
+        translate-all duration-100 ease-in-out overflow-hidden"
+        [class.hidden]="isFolded"
+        (click)="isFolded = !isFolded"
+        >
+          <a class="border-t first:border-none border-slate-200 first:pt-0 pt-2 w-full cursor-pointer" 
+          [routerLink]="['/', 'panel']" style="direction: rtl;">حساب کاربری</a>
+          
+          <a class="border-t first:border-none border-slate-200 first:pt-0 pt-2 w-full cursor-pointer" 
+          (click)="logout()" style="direction: rtl;">خروج از حساب</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- site icon -->
+    <a class="" routerLink="/">
+      <img
+        src="./../../assets/header/site-icon.png"
+        alt="website-icon"
+        class="h-12"
+      />
+    </a>
+  </div>
+</header>
+
+<!-- loading barrier -->
+<div *ngIf="!isLoaded" class="bg-white w-full h-full fixed top-0 left-0 z-50">
+  <img class="absolute top-[50%] left-[50%] -translate-x-[50%] -translte-y-[50%] w-72 animate-pulse" src="../../assets/header/site-icon.png"/>
+</div>
+<ngx-loading-bar class="z-50" [includeSpinner]=false [color]="'#f44336'"></ngx-loading-bar>
+

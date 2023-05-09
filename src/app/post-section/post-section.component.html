@@ -1,0 +1,52 @@
+<!-- type 1, menu list -->
+<div class="menu-section-container mx-10 mb-8" [class.hidden]="thread.type == 1">
+  <!-- header -->
+  <div class="header-container flex" style="direction: rtl;">
+    <a [routerLink]="['thread', thread.game.name]">
+      <p class="border-r-2 pr-2 text-slate-700 pt-1" [style.borderColor]="thread.primaryColor">آخرین های {{ thread.game.name }}</p>  
+    </a>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      height="25"
+      width="25"
+      viewBox="5 0 40 40"
+      class="animate-pulse"
+      [style.fill]="thread.primaryColor"
+    >
+      <path d="M28.05 36 16 23.95 28.05 11.9l2.15 2.15-9.9 9.9 9.9 9.9Z" />
+    </svg>
+  </div>
+  
+  <!-- list -->
+  <div class="list-scrollbar flex w-full gap-4 overflow-x-auto overflow-y-hidden py-2 snap-x" style="direction: rtl;">
+    <div class="content snap-end" *ngFor="let data of thread.items">
+      <div class="border shadow-md rounded-xl overflow-hidden h-16 w-32"
+            [style.borderColor]="thread.primaryColor"
+            [style.boxShadow]="'-1px 1px 4px -1px' + thread.primaryColor">
+          <a
+          [routerLink]="[
+            '/',
+            'post',
+            thread.game.name,
+            data.index
+          ]"
+          ><img
+            class="w-full h-full select-none"
+            [src]="environment.cdnServer + data.avatar"
+            loading="lazy"
+        /></a>
+      </div>
+      <p class="text-slate-600 text-sm text-center pt-1 w-32 h-10 overflow-hidden">{{ data.title }}</p>
+    </div>
+  </div>
+</div>
+
+<!-- type2, image -->
+<a [routerLink]="['thread', thread.game.name]"> 
+  <div class="imgage-container mb-8 px-10 w-full h-fit overflow-hidden" [class.hidden]="thread.type == 0">
+    <img class="rounded-xl w-full aspect-video border-2" [src]="environment.cdnServer + thread.game.avatar"
+    [style.borderColor]="thread.primaryColor"
+    [style.boxShadow]="'0px 0px 4px 0px' + thread.primaryColor"/>
+  </div>
+</a>
+

@@ -1,0 +1,249 @@
+  <div class="main-container flex justify-center my-4">
+  <div class="content-container container bg-white shadow-md pb-4">
+    <!-- title -->
+    <div
+      class="title-container w-full bg-cover bg-fixed bg-top h-[500px] relative"
+      [style.backgroundImage]="
+        'url(' + environment.cdnServer + post.avatar + ')'
+      "
+    >
+      <div
+        class="h-full w-full absolute top-0 left-0 bg-red-500 opacity-0"
+      ></div>
+      <div
+        class="inner-title-container absolute bottom-0 right-0 w-full bg-white/70 p-4"
+      >
+        <h1 class="title text-right text-4xl text-zinc-800">
+          {{ post.title }}
+        </h1>
+
+        <div
+          class="details-container gap-2 justify-end mt-2 text-zinc-900 flex-wrap flex"
+        >
+          <div class="author pl-2 flex gap-1 items-center">
+            <p class="">نظرات : {{ post.comments }}</p>
+            <img class="w-6 h-6" src="../../assets/game-section/comments.svg" />
+          </div>
+          <div
+            class="author border-l-2 border-white pl-2 flex gap-1 items-center"
+          >
+            <p class="">{{ post.updatedAt | date }}</p>
+            <img class="w-6 h-6" src="../../assets/game-section/date.svg" />
+          </div>
+          <div
+            class="author border-l-2 border-white pl-2 flex gap-1 items-center"
+          >
+            <p class="">{{ post.downloads }} : دانلود ها</p>
+            <img
+              class="w-6 h-6"
+              src="../../assets/game-section/downloads.svg"
+            />
+          </div>
+          <div
+            class="author border-l-2 border-white pl-2 flex gap-1 items-center"
+          >
+            <p class="">{{ post.rating | number }} / 5</p>
+            <img class="w-6 h-6" src="../../assets/game-section/likes.svg" />
+          </div>
+          <div
+            class="author border-l-2 border-white pl-2 flex gap-1 items-center cursor-pointer"
+          >
+            <p class="">{{ post.copyright }}</p>
+            <img class="w-6 h-6" src="../../assets/game-section/public.svg" />
+          </div>
+          <div
+            class="author border-l-2 border-white pl-2 flex gap-1 items-center cursor-pointer"
+          >
+            <a [routerLink]="['/', 'users', 'info', post.authorId]">{{ post.author }}</a>
+            <img class="w-6 h-6" src="../../assets/game-section/author.svg" />
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr />
+
+    <!-- description -->
+    <p class="details text-justify p-4" style="direction: rtl">
+      {{ post.desc }}
+    </p>
+
+    <!-- download-box header -->
+    <div class="download-box-title-container flex justify-end" *ngIf="post.files.length > 0">
+      <div class="summary-container w-fit">
+        <p
+          class="text-right mx-4 text-lg pb-2 cursor-pointer bg-slate-100 p-[6px] animate-pulse border-t border-r border-l rounded-sm"
+        >
+          دانلود باکس
+        </p>
+      </div>
+    </div>
+
+    <!-- download section -->
+    <div class="download-box-contianer flex justify-end mx-4 pb-4 border-b " *ngIf="post.files.length > 0">
+      <div class="donwload-links grow flex justify-end p-2 gap-4 bg-slate-100 flex-wrap">
+        <!-- links -->
+        <a
+          class="link p-2 w-16 h-fit cursor-pointer rounded-sm shadow-md hover:shadow-lg bg-white flex justify-center transition-color duration-100 ease-in
+          overflow-hidden" *ngFor="let link of post.files"
+          (click)="download(link.path)"
+        >
+          <div class="link-inner-container">
+            <div class="flex justify-center">
+              <img
+                class="h-6 pl-[2px]"
+                [src]="'../../assets/game-section/' + link.type + '.png'"
+              />
+            </div>
+            <p class="mt-1 text-sm text-slate-700 text-center">{{ link.title }}</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- extras -->
+    <div class="extra-headers-container justify-end mx-4 mt-4 flex">
+      <div
+        class="w-[116.6px] h-8 border p-1 cursor-pointer hover:bg-slate-100 transition-color duration-100 ease-in border-b-0 flex justify-end
+        align-center sm:gap-2 gap-1"
+        [class]="extrasState == 0 ? 'bg-slate-100' : 'bg-white'"
+        (click)="setExtrasState(0)"
+      >
+        <p class="sm:text-md text-sm">کپی رایت</p>
+        <img
+          class="w-6 aspect-square"
+          src="../../assets/game-section/private.svg"
+        />
+      </div>
+      <div
+        class="w-[116.6px] h-8 border p-1 cursor-pointer hover:bg-slate-100 transition-color duration-100 ease-in border-b-0 flex justify-end
+        align-center sm:gap-2 gap-1"
+        [class]="extrasState == 1 ? 'bg-slate-100' : 'bg-white'"
+        (click)="setExtrasState(1)"
+      >
+        <p class="sm:text-md text-sm">نظرات</p>
+        <img
+          class="w-6 aspect-square"
+          src="../../assets/game-section/comments.svg"
+        />
+      </div>
+      <div
+        class="w-[116.6px] h-8 border p-1 cursor-pointer hover:bg-slate-100 transition-color duration-100 ease-in border-b-0 flex justify-end
+        align-center sm:gap-2 gap-1"
+        [class.bg-slate-100]="extrasState == 2"
+        (click)="setExtrasState(2)"
+      >
+        <p class="sm:text-md text-sm">امتیاز دهی</p>
+        <img
+          class="w-6 aspect-square"
+          src="../../assets/game-section/react.svg"
+        />
+      </div>
+    </div>
+    <div class="extra-container justify-end flex">
+      <!-- copyright section -->
+      <div class="copyright-container border mx-4 p-4" *ngIf="extrasState == 0">
+        <p class="copyright-header text-right text-xl">
+          قوانین و ضوابط استفاده
+        </p>
+        <p class="copyright-desc mt-2 text-justify" style="direction: rtl">
+          این وب سایت و محتوای خصوصی آن متعلق به Masire-Roshan.ir 2022 © است. کلیه حقوق محفوظ است.
+          هرگونه توزیع مجدد یا تکثیر بخشی یا تمام مطالب بدون درج لینک و نام تولید گنندگان به هر شکلی ممنوع است.
+        </p>
+      </div>
+
+      <!-- comments section -->
+      <app-comments
+        class="w-full"
+        [id]="post._id"
+        *ngIf="extrasState == 1"
+      ></app-comments>
+
+      <!-- rating section of extras -->
+      <div
+        class="rating-container mx-4 p-4 w-[350px] border shadow-md"
+        *ngIf="extrasState == 2"
+      >
+        <p class="text-right text-lg">
+          : نظر خود را در مورد این پست ثبت کنید
+        </p>
+        <div class="starts-container flex justify-between my-4">
+          <img
+            class="aspect-square cursor-pointer w-8 opacity-70"
+            src="../../assets/game-section/verybad.svg"
+            (click)="rate(1)"
+            *ngIf="tempRate < 1"
+          />
+          <img
+            class="aspect-square cursor-pointer w-8 opacity-70"
+            src="../../assets/game-section/verybad-active.svg"
+            (click)="rate(1)"
+            *ngIf="tempRate >= 1"
+          />
+          <img
+            class="aspect-square cursor-pointer w-8 opacity-70"
+            src="../../assets/game-section/bad.svg"
+            (click)="rate(2)"
+            *ngIf="tempRate < 2"
+          />
+          <img
+            class="aspect-square cursor-pointer w-8 opacity-70"
+            src="../../assets/game-section/bad-active.svg"
+            (click)="rate(2)"
+            *ngIf="tempRate >= 2"
+          />
+          <img
+            class="aspect-square cursor-pointer w-8 opacity-70"
+            src="../../assets/game-section/medium.svg"
+            (click)="rate(3)"
+            *ngIf="tempRate < 3"
+          />
+          <img
+            class="aspect-square cursor-pointer w-8 opacity-70"
+            src="../../assets/game-section/medium-active.svg"
+            (click)="rate(3)"
+            *ngIf="tempRate >= 3"
+          />
+          <img
+            class="aspect-square cursor-pointer w-8 opacity-70"
+            src="../../assets/game-section/good.svg"
+            (click)="rate(4)"
+            *ngIf="tempRate < 4"
+          />
+          <img
+            class="aspect-square cursor-pointer w-8 opacity-70"
+            src="../../assets/game-section/good-active.svg"
+            (click)="rate(4)"
+            *ngIf="tempRate >= 4"
+          />
+          <img
+            class="aspect-square cursor-pointer w-8 opacity-70"
+            src="../../assets/game-section/verygood.svg"
+            (click)="rate(5)"
+            *ngIf="tempRate < 5"
+          />
+          <img
+            class="aspect-square cursor-pointer w-8 opacity-70"
+            src="../../assets/game-section/verygood-active.svg"
+            (click)="rate(5)"
+            *ngIf="tempRate >= 5"
+          />
+        </div>
+        <div class="button-container flex justify-center">
+          <button
+            class="border py-1 px-8 bg-slate-100 hover:bg-slate-200 transition-color duration-100 ease-in mt-2"
+            (click)="submitRate()"
+            *ngIf="!hasRated"
+          >
+            ثبت
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <!-- tags section -->
+    <div class="tagsContainer flex justify-end items-start gap-2 mt-4 border-t pt-4 mx-4 flex-wrap">
+      <p *ngFor="let tag of post.tags" class="px-1 bg-slate-200 rounded-md">{{tag}} #</p>
+      <p class="">: تگ ها</p>
+    </div>
+  </div>
+</div>

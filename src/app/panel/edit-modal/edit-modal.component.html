@@ -1,0 +1,107 @@
+<!-- dont change order of this input -->
+<input type="file" id="fileSelection" hidden accept="image/*" />
+<!-- main container -->
+<div class="main-container h-screen w-screen top-0 fixed z-40">
+  <!-- modal background -->
+  <div
+    class="background bg-slate-200 opacity-40 w-full h-full"
+    (click)="clearModal()"
+  ></div>
+
+  <!-- avatar upaload modal -->
+  <div
+    class="modal change-avatar w-72 h-fit bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-end p-4 gap-4 shadow-md"
+    *ngIf="modalType == 'avatar-upload'"
+  >
+    <h1 class="text-lg">آپلود تصویر جدید</h1>
+    <p>: تصویر مورد نظرتان را انتخاب کنید</p>
+    <p *ngIf="errorText" class="text-red-500">خطا ، لطفا مجددا امتحان کنید</p>
+    <div
+      class="progress-bar mx-4 w-full bg-slate-200 h-5 self-center relative"
+      *ngIf="uploadProgress > 0"
+    >
+      <div
+        class="h-full absolute top-0 bg-slate-700"
+        [style.width]="uploadProgress * 256 + 'px'"
+      ></div>
+      <p class="text-white pl-2 absolute">{{ uploadProgress * 100 }}%</p>
+    </div>
+    <div class="flex justify-between w-full">
+      <button
+        class="border-2 border-red-500 p-2 w-28 hover:text-white hover:bg-red-500 transition-all duration-100 ease-in mt-2"
+        (click)="clearModal()"
+      >
+        لغو
+      </button>
+      <button
+        class="border-2 border-slate-500 p-2 w-28 hover:text-white hover:bg-slate-500 transition-all duration-100 ease-in mt-2"
+        (click)="selectImage()"
+      >
+        انتخاب تصویر
+      </button>
+    </div>
+  </div>
+
+  <!-- change input modal -->
+  <div
+    class="modal change-avatar w-72 h-fit bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-end p-4 gap-4 shadow-md"
+    *ngIf="modalType == 'change-field'"
+  >
+    <h1 class="text-lg">تغییر {{ userData.name }}</h1>
+    <p>: {{ userData.name }} جدیدتان را وارد کنید</p>
+    <p *ngIf="errorText" class="text-red-500">{{ errorText }}</p>
+    <input
+      class="p-1 outline-none border border-slate-300 w-full"
+      style="direction: rtl;"
+      [formControl]="changeInput"
+    />
+    <!-- type="userData.value.type" -->
+    <!-- name="userData.value.name" -->
+    <!-- id="userData.value.id" -->
+    <!-- [value]="userData.value.value" -->
+    <div class="flex justify-between w-full">
+      <button
+        class="border-2 border-red-500 p-2 w-28 hover:text-white hover:bg-red-500 transition-all duration-100 ease-in mt-2"
+        (click)="clearModal()"
+      >
+        لغو
+      </button>
+      <button
+        class="border-2 border-slate-500 p-2 w-28 hover:text-white hover:bg-slate-500 transition-all duration-100 ease-in mt-2"
+        (click)="confirmInputChange()"
+      >
+        تایید
+      </button>
+    </div>
+  </div>
+
+  <!-- confirm input modal -->
+  <div
+    class="modal change-avatar w-72 h-fit bg-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-end p-4 gap-4 shadow-md"
+    *ngIf="modalType == 'confirm-field'"
+  >
+    <loadCaller (callback)='sendConfirmEmail(userData.data.value.value)'></loadCaller>
+    <h1 class="text-lg">{{ userData.name }}</h1>
+    <p>: {{ userData.data.name }}</p>
+    <p *ngIf="errorText" class="text-red-500">{{ errorText }}</p>
+    <input
+      class="p-1 outline-none border border-slate-300 w-full"
+      style="direction: rtl;"
+      [formControl]="confirmInput"
+    />
+    <div class="flex justify-between w-full">
+      <button
+        class="border-2 border-red-500 p-2 w-28 hover:text-white hover:bg-red-500 transition-all duration-100 ease-in mt-2"
+        (click)="clearModal()"
+      >
+        لغو
+      </button>
+      <button
+        class="border-2 border-slate-500 p-2 w-28 hover:text-white hover:bg-slate-500 transition-all duration-100 ease-in mt-2"
+        (click)="confirmInputConfirm()"
+      >
+        تایید
+      </button>
+    </div>
+  </div>
+</div>

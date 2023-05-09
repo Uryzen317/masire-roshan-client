@@ -1,0 +1,179 @@
+<!-- adding new game item -->
+<div class="add-games-container p-4 flex flex-col items-end gap-4 border">
+  <input hidden type="file" name="file" id="addGameFile" />
+  <h1 class="text-xl">افزودن عنوان</h1>
+
+  <!-- adding files -->
+  <div class="name-container">
+    <input
+      class="p-1 mr-4 outline-none border border-slate-300 w-48"
+      type="text"
+      [formControl]="addGameTitle"
+    />
+    <label for="name">: عنوان</label>
+  </div>
+
+  <div class="files-contaier flex items-center gap-2">
+    <button
+      type="button"
+      class="border-2 border-slate-400 px-4 py-1 hover:text-white hover:bg-slate-400 transition-color duration-200 ease-in-out"
+      (click)="addGameFileSelect()"
+    >
+      افزودن
+    </button>
+    <p class="ml-2">: تصویر</p>
+  </div>
+  <p *ngIf="addGameErrorText" class="text-red-500">
+    خطا ، لطفا مجددا امتحان کنید
+  </p>
+  <button
+    type="menu"
+    class="border-2 border-slate-400 px-4 py-1 hover:text-white hover:bg-slate-400 transition-color duration-200 ease-in-out flex gap-2"
+    (click)="addGameDone()"
+  >
+    تایید
+    <img
+      *ngIf="addGameState"
+      class="aspect-square w-6"
+      [src]="'../../../assets/panel/' + addGameState + '.png'"
+    />
+  </button>
+</div>
+
+<!-- editing existing games -->
+<div class="edit-games-container p-4 flex flex-col items-end gap-4 border mt-4">
+  <input hidden type="file" name="file" id="editGameFile" />
+  <h1 class="text-xl">ویرایش عنوان</h1>
+
+  <!-- adding files -->
+  <div class="name-container relative">
+    <input
+      class="p-1 mr-4 outline-none border border-slate-300 w-48"
+      type="text"
+      [formControl]="editGameSearch"
+    />
+    <label for="name">: جستجوی عنوان</label>
+
+    <!-- search results -->
+    <div class="absolute top-8 left-0 w-fit h-fit bg-white">
+      <div
+        class="flex h-8 border gap-4 cursor-pointer hover:bg-slate-300"
+        *ngFor="let game of editGameGames"
+        (click)="editGameSelect(game.name)"
+      >
+        <div class="flex">
+          <p>مورد &nbsp;</p>
+          <p>
+            {{ game.count }}
+          </p>
+        </div>
+        <p>{{ game.name }}</p>
+        <img [src]="environment.cdnServer + game.avatar" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <div class="selected-title-contaier flex items-center gap-2">
+    <input
+      class="p-1 mr-4 outline-none border border-slate-300 w-48"
+      type="text"
+      [value]="editGameTitle"
+      readonly
+    />
+    <label for="name">: عنوان انتخاب شده</label>
+  </div>
+
+  <div class="new-title-contaier flex items-center gap-2">
+    <input
+      class="p-1 mr-4 outline-none border border-slate-300 w-48"
+      type="text"
+      [formControl]="editGameNewTitle"
+    />
+    <label for="name">: عنوان جدید</label>
+  </div>
+
+  <div class="files-contaier flex items-center gap-2">
+    <button
+      type="button"
+      class="border-2 border-slate-400 px-4 py-1 hover:text-white hover:bg-slate-400 transition-color duration-200 ease-in-out"
+      (click)="editGameFileSelect()"
+    >
+      افزودن
+    </button>
+    <p class="ml-2">: ویرایش تصویر</p>
+  </div>
+  <p *ngIf="editGameErrorText" class="text-red-500">
+    {{ editGameErrorText }}
+  </p>
+  <button
+    type="menu"
+    class="border-2 border-slate-400 px-4 py-1 hover:text-white hover:bg-slate-400 transition-color duration-200 ease-in-out flex gap-2"
+    (click)="editGameDone()"
+  >
+    تایید
+    <img
+      *ngIf="editGameState"
+      class="aspect-square w-6"
+      [src]="'../../../assets/panel/' + editGameState + '.png'"
+    />
+  </button>
+</div>
+
+<!-- deleting game title -->
+<div class="edit-games-container p-4 flex flex-col items-end gap-4 border mt-4">
+  <h1 class="text-xl">حذف عنوان</h1>
+
+  <!-- search section -->
+  <div class="name-container relative">
+    <input
+      class="p-1 mr-4 outline-none border border-slate-300 w-48"
+      type="text"
+      [formControl]="deleteGameSearch"
+    />
+    <label for="name">: جستجوی عنوان</label>
+
+    <!-- search results -->
+    <div class="absolute top-8 left-0 w-fit h-fit bg-white">
+      <div
+        class="flex h-8 border gap-4 cursor-pointer hover:bg-slate-300"
+        *ngFor="let game of deleteGameGames"
+        (click)="deleteGameSelect(game.name)"
+      >
+        <div class="flex">
+          <p>مورد &nbsp;</p>
+          <p>
+            {{ game.count }}
+          </p>
+        </div>
+        <p>{{ game.name }}</p>
+        <img [src]="environment.cdnServer + game.avatar" alt="" />
+      </div>
+    </div>
+  </div>
+
+  <div class="selected-title-contaier flex items-center gap-2">
+    <input
+      class="p-1 mr-4 outline-none border border-slate-300 w-48"
+      type="text"
+      [value]="deleteGameTitle"
+      readonly
+    />
+    <label for="name">: عنوان انتخاب شده</label>
+  </div>
+
+  <p *ngIf="deleteGameErrorText" class="text-red-500">
+    خطا ، لطفا مجددا امتحان کنید
+  </p>
+  <button
+    type="menu"
+    class="border-2 border-slate-400 px-4 py-1 hover:text-white hover:bg-slate-400 transition-color duration-200 ease-in-out flex gap-2"
+    (click)="deleteGameDone()"
+  >
+    تایید
+    <img
+      *ngIf="deleteGameState"
+      class="aspect-square w-6"
+      [src]="'../../../assets/panel/' + deleteGameState + '.png'"
+    />
+  </button>
+</div>

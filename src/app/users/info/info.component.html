@@ -1,0 +1,103 @@
+<div class="main-container flex justify-center">
+  <div class="info-container container bg-white m-4 min-h-screen shadow-md flex justify-between bg-cover flex-col sm:flex-row" 
+       [style.backgroundImage]="data?.background ? 'url(../../../assets/users/bg-left-' + data?.background + '.jpg)' : ''">
+       
+    <!-- left section -->
+    <div class="px-4 py-8 order-2 grow xl:mr-16">
+      <!-- header and bio -->
+      <div class='header-container flex justify-end gap-2 w-full'>
+        <p class="text-right text-4xl text-white">". هستم</p>
+        <p><strong class="text-right text-4xl text-white">{{ data?.author.firstname ? data?.author.firstname : data?.author.username }}</strong></p>
+        <p class="text-right text-4xl text-white">،من“</p>
+      </div>
+      <p class="text-white text-justify mt-8" style="direction: rtl;">
+        {{ data?.bio }}
+      </p>
+      
+     <!-- goals -->
+     <div class="goals-container">
+      <p class="text-right text-white mt-8 text-lg"><strong>: اهداف</strong></p>
+      <ul class="text-right text-white mr-8 mt-2 list-decimal" style="direction: rtl;">
+        <li *ngFor="let goal of data?.goals">{{ goal }}</li>
+      </ul>
+     </div> 
+     
+     <!-- skills -->
+     <div class="skills-container">
+      <p class="text-right text-white mt-8 text-lg"><strong>: مهارات</strong></p>
+      <div class="skills-list flex flex-wrap gap-4 mt-2">
+        <div class="skill bg-white w-52 h-8 px-2 rounded-sm shadow-sm shadow-white shadow-white group hover:-translate-y-1 transition-all duration-50
+             overflow-hidden " *ngFor="let skill of data?.skills; index as index">
+          <div class="flex justify-between">
+            <p>{{ skill.value + '٪' }}</p>
+            <p style='direction: rtl;'>{{ skill.skill }}</p>
+          </div>
+          <div class="relative">
+            <div class="bg-slate-300 w-full h-1 absolute top-0"></div>
+            <div class="bg-sky-600 h-1 absolute top-0 group-hover:shadow-sm group-hover:shadow-sky-500 transition-color duration-100"
+                 [style.width]="skill.value < 101 ? skill.value +'%' : 0 +'%'"></div>
+          </div>
+        </div>        
+      </div>
+     </div> 
+     
+      <!-- achievements -->
+     <div class="goals-container">
+      <p class="text-right text-white mt-8 text-lg"><strong>: افتخارات</strong></p>
+      <div class="achievements-list flex gap-4 flex-wrap mt-2">
+        <div class="achievement w-24 min-h-[85px] h-fit bg-white flex items-center flex-col p-2 gap-2 rounded-md shadow-sm shadow-white
+             hover:-translate-y-1 transition-all duration-50 group" *ngFor='let a of data?.achievements'>
+          <img class="w-12 h-12 group-hover:scale-110 transition-all duration-50" [src]="'../../../assets/users/badges/'+ a.avatar +'.png'"/>
+          <p class='text-center'>{{ a.achievement }}</p>
+        </div> 
+      </div>
+     </div> 
+
+     <!-- call-info -->
+     <div class="call-info-container">
+      <p class="text-right text-white mt-8 text-lg"><strong>: اطلاعات تماس</strong></p>
+      <div class="call-info-list flex gap-x-[330px] gap-y-4 justify-end mt-2 flex-wrap">
+        <div class="call-info w-fit h-fit bg-white flex items-center p-2 gap-2 rounded-md shadow-sm shadow-white cursor-pointer relative group"
+             *ngFor='let ci of data?.callInfo' [class.hidden]='!ci.value'>
+          <p>{{ ci.platform }}</p>
+          <img class="w-6 h-6" [src]="'../../../assets/footer/'+ ci.platform +'.png'"/>
+          
+          <div class="overflow-hidden w-0 h-[40px] absolute top-0 translate-x-0 bg-white p-2 shadow-sm shadow-white rounded-md opacity-0 transition-all
+              duration-900 group-hover:opacity-100 sm:group-hover:-translate-x-[305px] sm:group-hover:w-72 overflow-hidden overflow-hidden
+              group-hover:w-56 group-hover:-translate-x-[250px]">
+            <p>{{ ci.value }}</p>
+          </div>
+        </div>
+      </div>
+     </div> 
+      
+    </div>
+    
+    <!-- right section -->
+    <div class="relative sm:w-72 w-full shrink-0 sm:order-2 h-[667px]">
+      <img class="w-72 h-[650px] absolute -top-0 sm:right-0 border-2 border-sky-800 shadow-sm shadow-sky-800 duration-200 hover:rounded-br-none transition-all peer
+           rounded-tl-full rounded-br-full hover:rounded-tr-full hover:rounded-bl-full hover:rounded-tl-none ease-in-out right-1/2 translate-x-1/2
+           sm:translate-x-0"
+           src="../../../assets/users/bg-right.jpg" />
+      
+      <p class="absolute text-right sm:w-48 w-48 text-white sm:right-4 sm:peer-hover:-translate-x-16 sm:peer-hover:text-left transition-all duration-200 
+                ease-in-out sm:top-20 top-32 right-1/2 translate-x-1/2 sm:translate-x-0"
+                >{{ data?.author.createdAt | date }} : تاریخ عضویت</p>
+      <p class="absolute text-right sm:w-36 w-48 text-white sm:right-4 sm:peer-hover:-translate-x-28 sm:peer-hover:text-left transition-all duration-200 
+                ease-in-out sm:top-[110px] top-[160px] right-1/2 translate-x-1/2 sm:translate-x-0"
+                >{{ data?.posts }} : تعداد پست ها</p>
+      <p class="absolute text-right sm:w-36 w-48 text-white sm:right-4 sm:peer-hover:-translate-x-28 sm:peer-hover:text-left transition-all duration-200 
+                ease-in-out sm:top-[140px] top-[190px] right-1/2 translate-x-1/2 sm:translate-x-0"
+                >{{ data?.author.role }} : رتبه</p>
+                
+      <img class="w-64 h-64 absolute top-72 bg-white rounded-full border-8 peer-hover:shadow-sky-600 ease-in-out
+           border-sky-800 shadow-lg shadow-sky-800 peer-hover:-translate-y-4 peer-hover:border-sky-600 transition-all duration-200 peer-hover:shadow-lg
+           left-1/2 xl:left-1/3 -translate-x-1/2" 
+           [src]="data?.author.isGoogleAvatar ? 
+                  data?.author.avatar : 
+                  data?.author.avatar ? 
+                    environment.cdnServer+data?.author.avatar :
+                    './../../assets/header/user-icon.png'"/>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,1261 @@
+<div class="main-container space-y-4">
+  <!-- 1 -->
+  <form [formGroup]="firstSection" (ngSubmit)="submit(0)">
+    <details
+      class="space-y-4 border border-slate-200 p-4"
+      style="direction : rtl ;"
+    >
+      <summary class="cursor-pointer" style="list-style-type: disc;"
+        >پنل اول</summary
+      >
+
+      <!-- already selecred game -->
+      <p *ngIf="data">عنوان فعلی : {{ data[0].game.name }}</p>
+
+      <!-- selecting name of the game -->
+      <div class="name-container">
+        <label for="name">عنوان :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="title"
+        >
+          <option *ngFor="let game of games" [value]="game._id">{{
+            game.name
+          }}</option>
+        </select>
+      </div>
+
+      <!-- selecting primary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ اولیه :</label>
+        <input
+          class="mr-2 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="primaryColor"
+        />
+      </div>
+
+      <!-- selecting secondary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ ثانویه :</label>
+        <input
+          class="mr-1 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="secondaryColor"
+        />
+      </div>
+
+      <!-- selecting type -->
+      <div class="type-container">
+        <label for="type">نوع :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52 mr-10"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="type"
+        >
+          <option value="0">لیست (پیشفرض)</option>
+          <option value="1">تصویر</option>
+        </select>
+      </div>
+
+      <!-- errors -->
+      <p *ngIf="firstErrorText" class="text-red-500">
+        خطا ، لطفا مجددا امتحان کنید
+      </p>
+
+      <!-- confirmation -->
+      <button
+        type="menu"
+        class="border-2 border-slate-400 px-4 py-1 hover:text-white hover:bg-slate-400 transition-color duration-200 ease-in-out flex gap-2"
+      >
+        تایید
+        <img
+          class="aspect-square w-6"
+          [src]="'../../../assets/panel/' + firstState + '.png'"
+          *ngIf="firstState"
+        />
+      </button>
+    </details>
+  </form>
+
+  <!-- 2 -->
+  <form [formGroup]="secondSection" (ngSubmit)="submit(1)">
+    <details
+      class="space-y-4 border border-slate-200 p-4"
+      style="direction : rtl ;"
+    >
+      <summary class="cursor-pointer" style="list-style-type: disc;"
+        >پنل دوم</summary
+      >
+
+      <!-- already selecred game -->
+      <p *ngIf="data && data[1]">عنوان فعلی : {{ data[1].game.name }}</p>
+
+      <!-- selecting name of the game -->
+      <div class="name-container">
+        <label for="name">عنوان :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="title"
+        >
+          <option *ngFor="let game of games" [value]="game._id">{{
+            game.name
+          }}</option>
+        </select>
+      </div>
+
+      <!-- selecting primary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ اولیه :</label>
+        <input
+          class="mr-2 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="primaryColor"
+        />
+      </div>
+
+      <!-- selecting secondary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ ثانویه :</label>
+        <input
+          class="mr-1 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="secondaryColor"
+        />
+      </div>
+
+      <!-- selecting type -->
+      <div class="type-container">
+        <label for="type">نوع :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52 mr-10"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="type"
+        >
+          <option value="0">لیست (پیشفرض)</option>
+          <option value="1">تصویر</option>
+        </select>
+      </div>
+
+      <!-- errors -->
+      <p *ngIf="secondErrorText" class="text-red-500">
+        خطا ، لطفا مجددا امتحان کنید
+      </p>
+
+      <!-- confirmation -->
+      <button
+        type="menu"
+        class="border-2 border-slate-400 px-4 py-1 hover:text-white hover:bg-slate-400 transition-color duration-200 ease-in-out flex gap-2"
+      >
+        تایید
+        <img
+          class="aspect-square w-6"
+          [src]="'../../../assets/panel/' + secondState + '.png'"
+          *ngIf="secondState"
+        />
+      </button>
+    </details>
+  </form>
+
+  <!-- 3 -->
+  <form [formGroup]="thirdSection" (ngSubmit)="submit(2)">
+    <details
+      class="space-y-4 border border-slate-200 p-4"
+      style="direction : rtl ;"
+    >
+      <summary class="cursor-pointer" style="list-style-type: disc;"
+        >پنل سوم</summary
+      >
+
+      <!-- already selecred game -->
+      <p *ngIf="data && data[2]">عنوان فعلی : {{ data[2].game.name }}</p>
+
+      <!-- selecting name of the game -->
+      <div class="name-container">
+        <label for="name">عنوان :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="title"
+        >
+          <option *ngFor="let game of games" [value]="game._id">{{
+            game.name
+          }}</option>
+        </select>
+      </div>
+
+      <!-- selecting primary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ اولیه :</label>
+        <input
+          class="mr-2 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="primaryColor"
+        />
+      </div>
+
+      <!-- selecting secondary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ ثانویه :</label>
+        <input
+          class="mr-1 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="secondaryColor"
+        />
+      </div>
+
+      <!-- selecting type -->
+      <div class="type-container">
+        <label for="type">نوع :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52 mr-10"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="type"
+        >
+          <option value="0">لیست (پیشفرض)</option>
+          <option value="1">تصویر</option>
+        </select>
+      </div>
+
+      <!-- errors -->
+      <p *ngIf="thirdErrorText" class="text-red-500">
+        خطا ، لطفا مجددا امتحان کنید
+      </p>
+
+      <!-- confirmation -->
+      <button
+        type="menu"
+        class="border-2 border-slate-400 px-4 py-1 hover:text-white hover:bg-slate-400 transition-color duration-200 ease-in-out flex gap-2"
+      >
+        تایید
+        <img
+          class="aspect-square w-6"
+          [src]="'../../../assets/panel/' + thirdState + '.png'"
+          *ngIf="thirdState"
+        />
+      </button>
+    </details>
+  </form>
+
+  <!-- 4 -->
+  <form [formGroup]="fourthSection" (ngSubmit)="submit(3)">
+    <details
+      class="space-y-4 border border-slate-200 p-4"
+      style="direction : rtl ;"
+    >
+      <summary class="cursor-pointer" style="list-style-type: disc;"
+        >پنل چهارم</summary
+      >
+
+      <!-- already selecred game -->
+      <p *ngIf="data && data[3]">عنوان فعلی : {{ data[3].game.name }}</p>
+
+      <!-- selecting name of the game -->
+      <div class="name-container">
+        <label for="name">عنوان :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="title"
+        >
+          <option *ngFor="let game of games" [value]="game._id">{{
+            game.name
+          }}</option>
+        </select>
+      </div>
+
+      <!-- selecting primary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ اولیه :</label>
+        <input
+          class="mr-2 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="primaryColor"
+        />
+      </div>
+
+      <!-- selecting secondary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ ثانویه :</label>
+        <input
+          class="mr-1 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="secondaryColor"
+        />
+      </div>
+
+      <!-- selecting type -->
+      <div class="type-container">
+        <label for="type">نوع :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52 mr-10"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="type"
+        >
+          <option value="0">لیست (پیشفرض)</option>
+          <option value="1">تصویر</option>
+        </select>
+      </div>
+
+      <!-- errors -->
+      <p *ngIf="fourthErrorText" class="text-red-500">
+        خطا ، لطفا مجددا امتحان کنید
+      </p>
+
+      <!-- confirmation -->
+      <button
+        type="menu"
+        class="border-2 border-slate-400 px-4 py-1 hover:text-white hover:bg-slate-400 transition-color duration-200 ease-in-out flex gap-2"
+      >
+        تایید
+        <img
+          class="aspect-square w-6"
+          [src]="'../../../assets/panel/' + fourthState + '.png'"
+          *ngIf="fourthState"
+        />
+      </button>
+    </details>
+  </form>
+
+  <!-- 5 -->
+  <form [formGroup]="fifthSection" (ngSubmit)="submit(4)">
+    <details
+      class="space-y-4 border border-slate-200 p-4"
+      style="direction : rtl ;"
+    >
+      <summary class="cursor-pointer" style="list-style-type: disc;"
+        >پنل پنجم</summary
+      >
+
+      <!-- already selecred game -->
+      <p *ngIf="data && data[4]">عنوان فعلی : {{ data[4].game.name }}</p>
+
+      <!-- selecting name of the game -->
+      <div class="name-container">
+        <label for="name">عنوان :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="title"
+        >
+          <option *ngFor="let game of games" [value]="game._id">{{
+            game.name
+          }}</option>
+        </select>
+      </div>
+
+      <!-- selecting primary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ اولیه :</label>
+        <input
+          class="mr-2 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="primaryColor"
+        />
+      </div>
+
+      <!-- selecting secondary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ ثانویه :</label>
+        <input
+          class="mr-1 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="secondaryColor"
+        />
+      </div>
+
+      <!-- selecting type -->
+      <div class="type-container">
+        <label for="type">نوع :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52 mr-10"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="type"
+        >
+          <option value="0">لیست (پیشفرض)</option>
+          <option value="1">تصویر</option>
+        </select>
+      </div>
+
+      <!-- errors -->
+      <p *ngIf="fifthErrorText" class="text-red-500">
+        خطا ، لطفا مجددا امتحان کنید
+      </p>
+
+      <!-- confirmation -->
+      <button
+        type="menu"
+        class="border-2 border-slate-400 px-4 py-1 hover:text-white hover:bg-slate-400 transition-color duration-200 ease-in-out flex gap-2"
+      >
+        تایید
+        <img
+          class="aspect-square w-6"
+          [src]="'../../../assets/panel/' + fifthState + '.png'"
+          *ngIf="fifthState"
+        />
+      </button>
+    </details>
+  </form>
+
+  <!-- 6 -->
+  <form [formGroup]="sixthSection" (ngSubmit)="submit(5)">
+    <details
+      class="space-y-4 border border-slate-200 p-4"
+      style="direction : rtl ;"
+    >
+      <summary class="cursor-pointer" style="list-style-type: disc;"
+        >پنل ششم</summary
+      >
+
+      <!-- already selecred game -->
+      <p *ngIf="data && data[5]">عنوان فعلی : {{ data[5].game.name }}</p>
+
+      <!-- selecting name of the game -->
+      <div class="name-container">
+        <label for="name">عنوان :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="title"
+        >
+          <option *ngFor="let game of games" [value]="game._id">{{
+            game.name
+          }}</option>
+        </select>
+      </div>
+
+      <!-- selecting primary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ اولیه :</label>
+        <input
+          class="mr-2 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="primaryColor"
+        />
+      </div>
+
+      <!-- selecting secondary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ ثانویه :</label>
+        <input
+          class="mr-1 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="secondaryColor"
+        />
+      </div>
+
+      <!-- selecting type -->
+      <div class="type-container">
+        <label for="type">نوع :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52 mr-10"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="type"
+        >
+          <option value="0">لیست (پیشفرض)</option>
+          <option value="1">تصویر</option>
+        </select>
+      </div>
+
+      <!-- errors -->
+      <p *ngIf="sixthErrorText" class="text-red-500">
+        خطا ، لطفا مجددا امتحان کنید
+      </p>
+
+      <!-- confirmation -->
+      <button
+        type="menu"
+        class="border-2 border-slate-400 px-4 py-1 hover:text-white hover:bg-slate-400 transition-color duration-200 ease-in-out flex gap-2"
+      >
+        تایید
+        <img
+          class="aspect-square w-6"
+          [src]="'../../../assets/panel/' + sixthState + '.png'"
+          *ngIf="sixthState"
+        />
+      </button>
+    </details>
+  </form>
+
+  <!-- 7 -->
+  <form [formGroup]="seventhSection" (ngSubmit)="submit(6)">
+    <details
+      class="space-y-4 border border-slate-200 p-4"
+      style="direction : rtl ;"
+    >
+      <summary class="cursor-pointer" style="list-style-type: disc;"
+        >پنل هفتم</summary
+      >
+
+      <!-- already selecred game -->
+      <p *ngIf="data && data[6]">عنوان فعلی : {{ data[6].game.name }}</p>
+
+      <!-- selecting name of the game -->
+      <div class="name-container">
+        <label for="name">عنوان :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="title"
+        >
+          <option *ngFor="let game of games" [value]="game._id">{{
+            game.name
+          }}</option>
+        </select>
+      </div>
+
+      <!-- selecting primary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ اولیه :</label>
+        <input
+          class="mr-2 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="primaryColor"
+        />
+      </div>
+
+      <!-- selecting secondary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ ثانویه :</label>
+        <input
+          class="mr-1 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="secondaryColor"
+        />
+      </div>
+
+      <!-- selecting type -->
+      <div class="type-container">
+        <label for="type">نوع :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52 mr-10"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="type"
+        >
+          <option value="0">لیست (پیشفرض)</option>
+          <option value="1">تصویر</option>
+        </select>
+      </div>
+
+      <!-- errors -->
+      <p *ngIf="seventhErrorText" class="text-red-500">
+        خطا ، لطفا مجددا امتحان کنید
+      </p>
+
+      <!-- confirmation -->
+      <button
+        type="menu"
+        class="border-2 border-slate-400 px-4 py-1 hover:text-white hover:bg-slate-400 transition-color duration-200 ease-in-out flex gap-2"
+      >
+        تایید
+        <img
+          class="aspect-square w-6"
+          [src]="'../../../assets/panel/' + seventhState + '.png'"
+          *ngIf="seventhState"
+        />
+      </button>
+    </details>
+  </form>
+
+  <!-- 8 -->
+  <form [formGroup]="eighthSection" (ngSubmit)="submit(7)">
+    <details
+      class="space-y-4 border border-slate-200 p-4"
+      style="direction : rtl ;"
+    >
+      <summary class="cursor-pointer" style="list-style-type: disc;"
+        >پنل هشتم</summary
+      >
+
+      <!-- already selecred game -->
+      <p *ngIf="data && data[7]">عنوان فعلی : {{ data[7].game.name }}</p>
+
+      <!-- selecting name of the game -->
+      <div class="name-container">
+        <label for="name">عنوان :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="title"
+        >
+          <option *ngFor="let game of games" [value]="game._id">{{
+            game.name
+          }}</option>
+        </select>
+      </div>
+
+      <!-- selecting primary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ اولیه :</label>
+        <input
+          class="mr-2 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="primaryColor"
+        />
+      </div>
+
+      <!-- selecting secondary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ ثانویه :</label>
+        <input
+          class="mr-1 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="secondaryColor"
+        />
+      </div>
+
+      <!-- selecting type -->
+      <div class="type-container">
+        <label for="type">نوع :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52 mr-10"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="type"
+        >
+          <option value="0">لیست (پیشفرض)</option>
+          <option value="1">تصویر</option>
+        </select>
+      </div>
+
+      <!-- errors -->
+      <p *ngIf="eighthErrorText" class="text-red-500">
+        خطا ، لطفا مجددا امتحان کنید
+      </p>
+
+      <!-- confirmation -->
+      <button
+        type="menu"
+        class="border-2 border-slate-400 px-4 py-1 hover:text-white hover:bg-slate-400 transition-color duration-200 ease-in-out flex gap-2"
+      >
+        تایید
+        <img
+          class="aspect-square w-6"
+          [src]="'../../../assets/panel/' + eighthState + '.png'"
+          *ngIf="eighthState"
+        />
+      </button>
+    </details>
+  </form>
+
+  <!-- 9 -->
+  <form [formGroup]="ninthSection" (ngSubmit)="submit(8)">
+    <details
+      class="space-y-4 border border-slate-200 p-4"
+      style="direction : rtl ;"
+    >
+      <summary class="cursor-pointer" style="list-style-type: disc;"
+        >پنل نهم</summary
+      >
+
+      <!-- already selecred game -->
+      <p *ngIf="data && data[8]">عنوان فعلی : {{ data[8].game.name }}</p>
+
+      <!-- selecting name of the game -->
+      <div class="name-container">
+        <label for="name">عنوان :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="title"
+        >
+          <option *ngFor="let game of games" [value]="game._id">{{
+            game.name
+          }}</option>
+        </select>
+      </div>
+
+      <!-- selecting primary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ اولیه :</label>
+        <input
+          class="mr-2 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="primaryColor"
+        />
+      </div>
+
+      <!-- selecting secondary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ ثانویه :</label>
+        <input
+          class="mr-1 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="secondaryColor"
+        />
+      </div>
+
+      <!-- selecting type -->
+      <div class="type-container">
+        <label for="type">نوع :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52 mr-10"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="type"
+        >
+          <option value="0">لیست (پیشفرض)</option>
+          <option value="1">تصویر</option>
+        </select>
+      </div>
+
+      <!-- errors -->
+      <p *ngIf="ninthErrorText" class="text-red-500">
+        خطا ، لطفا مجددا امتحان کنید
+      </p>
+
+      <!-- confirmation -->
+      <button
+        type="menu"
+        class="border-2 border-slate-400 px-4 py-1 hover:text-white hover:bg-slate-400 transition-color duration-200 ease-in-out flex gap-2"
+      >
+        تایید
+        <img
+          class="aspect-square w-6"
+          [src]="'../../../assets/panel/' + ninthState + '.png'"
+          *ngIf="ninthState"
+        />
+      </button>
+    </details>
+  </form>
+
+  <!-- 10 -->
+  <form [formGroup]="tenthSection" (ngSubmit)="submit(9)">
+    <details
+      class="space-y-4 border border-slate-200 p-4"
+      style="direction : rtl ;"
+    >
+      <summary class="cursor-pointer" style="list-style-type: disc;"
+        >پنل دهم</summary
+      >
+
+      <!-- already selecred game -->
+      <p *ngIf="data && data[9]">عنوان فعلی : {{ data[9].game.name }}</p>
+
+      <!-- selecting name of the game -->
+      <div class="name-container">
+        <label for="name">عنوان :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="title"
+        >
+          <option *ngFor="let game of games" [value]="game._id">{{
+            game.name
+          }}</option>
+        </select>
+      </div>
+
+      <!-- selecting primary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ اولیه :</label>
+        <input
+          class="mr-2 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="primaryColor"
+        />
+      </div>
+
+      <!-- selecting secondary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ ثانویه :</label>
+        <input
+          class="mr-1 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="secondaryColor"
+        />
+      </div>
+
+      <!-- selecting type -->
+      <div class="type-container">
+        <label for="type">نوع :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52 mr-10"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="type"
+        >
+          <option value="0">لیست (پیشفرض)</option>
+          <option value="1">تصویر</option>
+        </select>
+      </div>
+
+      <!-- errors -->
+      <p *ngIf="tenthErrorText" class="text-red-500">
+        خطا ، لطفا مجددا امتحان کنید
+      </p>
+
+      <!-- confirmation -->
+      <button
+        type="menu"
+        class="border-2 border-slate-400 px-4 py-1 hover:text-white hover:bg-slate-400 transition-color duration-200 ease-in-out flex gap-2"
+      >
+        تایید
+        <img
+          class="aspect-square w-6"
+          [src]="'../../../assets/panel/' + tenthState + '.png'"
+          *ngIf="tenthState"
+        />
+      </button>
+    </details>
+  </form>
+  
+  <!-- 11 -->
+  <form [formGroup]="eleventhSection" (ngSubmit)="submit(10)">
+    <details
+      class="space-y-4 border border-slate-200 p-4"
+      style="direction : rtl ;"
+    >
+      <summary class="cursor-pointer" style="list-style-type: disc;"
+        >پنل یازدهم</summary
+      >
+
+      <!-- already selecred game -->
+      <p *ngIf="data && data[10]">عنوان فعلی : {{ data[10].game.name }}</p>
+
+      <!-- selecting name of the game -->
+      <div class="name-container">
+        <label for="name">عنوان :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="title"
+        >
+          <option *ngFor="let game of games" [value]="game._id">{{
+            game.name
+          }}</option>
+        </select>
+      </div>
+
+      <!-- selecting primary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ اولیه :</label>
+        <input
+          class="mr-2 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="primaryColor"
+        />
+      </div>
+
+      <!-- selecting secondary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ ثانویه :</label>
+        <input
+          class="mr-1 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="secondaryColor"
+        />
+      </div>
+
+      <!-- selecting type -->
+      <div class="type-container">
+        <label for="type">نوع :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52 mr-10"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="type"
+        >
+          <option value="0">لیست (پیشفرض)</option>
+          <option value="1">تصویر</option>
+        </select>
+      </div>
+
+      <!-- errors -->
+      <p *ngIf="eleventhErrorText" class="text-red-500">
+        خطا ، لطفا مجددا امتحان کنید
+      </p>
+
+      <!-- confirmation -->
+      <button
+        type="menu"
+        class="border-2 border-slate-400 px-4 py-1 hover:text-white hover:bg-slate-400 transition-color duration-200 ease-in-out flex gap-2"
+      >
+        تایید
+        <img
+          class="aspect-square w-6"
+          [src]="'../../../assets/panel/' + eleventhState + '.png'"
+          *ngIf="eleventhState"
+        />
+      </button>
+    </details>
+  </form>
+  
+  <!-- 12 -->
+  <form [formGroup]="twelvthSection" (ngSubmit)="submit(11)">
+    <details
+      class="space-y-4 border border-slate-200 p-4"
+      style="direction : rtl ;"
+    >
+      <summary class="cursor-pointer" style="list-style-type: disc;"
+        >پنل دوازدهم</summary
+      >
+
+      <!-- already selecred game -->
+      <p *ngIf="data && data[11]">عنوان فعلی : {{ data[11].game.name }}</p>
+
+      <!-- selecting name of the game -->
+      <div class="name-container">
+        <label for="name">عنوان :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="title"
+        >
+          <option *ngFor="let game of games" [value]="game._id">{{
+            game.name
+          }}</option>
+        </select>
+      </div>
+
+      <!-- selecting primary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ اولیه :</label>
+        <input
+          class="mr-2 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="primaryColor"
+        />
+      </div>
+
+      <!-- selecting secondary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ ثانویه :</label>
+        <input
+          class="mr-1 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="secondaryColor"
+        />
+      </div>
+
+      <!-- selecting type -->
+      <div class="type-container">
+        <label for="type">نوع :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52 mr-10"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="type"
+        >
+          <option value="0">لیست (پیشفرض)</option>
+          <option value="1">تصویر</option>
+        </select>
+      </div>
+
+      <!-- errors -->
+      <p *ngIf="twelvthErrorText" class="text-red-500">
+        خطا ، لطفا مجددا امتحان کنید
+      </p>
+
+      <!-- confirmation -->
+      <button
+        type="menu"
+        class="border-2 border-slate-400 px-4 py-1 hover:text-white hover:bg-slate-400 transition-color duration-200 ease-in-out flex gap-2"
+      >
+        تایید
+        <img
+          class="aspect-square w-6"
+          [src]="'../../../assets/panel/' + twelvthState + '.png'"
+          *ngIf="twelvthState"
+        />
+      </button>
+    </details>
+  </form>
+  
+  <!-- 13 -->
+  <form [formGroup]="thirteenthSection" (ngSubmit)="submit(12)">
+    <details
+      class="space-y-4 border border-slate-200 p-4"
+      style="direction : rtl ;"
+    >
+      <summary class="cursor-pointer" style="list-style-type: disc;"
+        >پنل سیزدهم</summary
+      >
+
+      <!-- already selecred game -->
+      <p *ngIf="data && data[12]">عنوان فعلی : {{ data[12].game.name }}</p>
+
+      <!-- selecting name of the game -->
+      <div class="name-container">
+        <label for="name">عنوان :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="title"
+        >
+          <option *ngFor="let game of games" [value]="game._id">{{
+            game.name
+          }}</option>
+        </select>
+      </div>
+
+      <!-- selecting primary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ اولیه :</label>
+        <input
+          class="mr-2 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="primaryColor"
+        />
+      </div>
+
+      <!-- selecting secondary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ ثانویه :</label>
+        <input
+          class="mr-1 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="secondaryColor"
+        />
+      </div>
+
+      <!-- selecting type -->
+      <div class="type-container">
+        <label for="type">نوع :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52 mr-10"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="type"
+        >
+          <option value="0">لیست (پیشفرض)</option>
+          <option value="1">تصویر</option>
+        </select>
+      </div>
+
+      <!-- errors -->
+      <p *ngIf="thirteenthErrorText" class="text-red-500">
+        خطا ، لطفا مجددا امتحان کنید
+      </p>
+
+      <!-- confirmation -->
+      <button
+        type="menu"
+        class="border-2 border-slate-400 px-4 py-1 hover:text-white hover:bg-slate-400 transition-color duration-200 ease-in-out flex gap-2"
+      >
+        تایید
+        <img
+          class="aspect-square w-6"
+          [src]="'../../../assets/panel/' + thirteenthState + '.png'"
+          *ngIf="thirteenthState"
+        />
+      </button>
+    </details>
+  </form>
+  
+  <!-- 14 -->
+  <form [formGroup]="fourteenthSection" (ngSubmit)="submit(13)">
+    <details
+      class="space-y-4 border border-slate-200 p-4"
+      style="direction : rtl ;"
+    >
+      <summary class="cursor-pointer" style="list-style-type: disc;"
+        >پنل چهاردهم</summary
+      >
+
+      <!-- already selecred game -->
+      <p *ngIf="data && data[13]">عنوان فعلی : {{ data[13].game.name }}</p>
+
+      <!-- selecting name of the game -->
+      <div class="name-container">
+        <label for="name">عنوان :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="title"
+        >
+          <option *ngFor="let game of games" [value]="game._id">{{
+            game.name
+          }}</option>
+        </select>
+      </div>
+
+      <!-- selecting primary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ اولیه :</label>
+        <input
+          class="mr-2 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="primaryColor"
+        />
+      </div>
+
+      <!-- selecting secondary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ ثانویه :</label>
+        <input
+          class="mr-1 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="secondaryColor"
+        />
+      </div>
+
+      <!-- selecting type -->
+      <div class="type-container">
+        <label for="type">نوع :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52 mr-10"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="type"
+        >
+          <option value="0">لیست (پیشفرض)</option>
+          <option value="1">تصویر</option>
+        </select>
+      </div>
+
+      <!-- errors -->
+      <p *ngIf="fourteenthErrorText" class="text-red-500">
+        خطا ، لطفا مجددا امتحان کنید
+      </p>
+
+      <!-- confirmation -->
+      <button
+        type="menu"
+        class="border-2 border-slate-400 px-4 py-1 hover:text-white hover:bg-slate-400 transition-color duration-200 ease-in-out flex gap-2"
+      >
+        تایید
+        <img
+          class="aspect-square w-6"
+          [src]="'../../../assets/panel/' + fourteenthState + '.png'"
+          *ngIf="fourteenthState"
+        />
+      </button>
+    </details>
+  </form>
+  
+  <!-- 15 -->
+  <form [formGroup]="fifteenthSection" (ngSubmit)="submit(14)">
+    <details
+      class="space-y-4 border border-slate-200 p-4"
+      style="direction : rtl ;"
+    >
+      <summary class="cursor-pointer" style="list-style-type: disc;"
+        >پنل پانزدهم</summary
+      >
+
+      <!-- already selecred game -->
+      <p *ngIf="data && data[14]">عنوان فعلی : {{ data[14].game.name }}</p>
+
+      <!-- selecting name of the game -->
+      <div class="name-container">
+        <label for="name">عنوان :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="title"
+        >
+          <option *ngFor="let game of games" [value]="game._id">{{
+            game.name
+          }}</option>
+        </select>
+      </div>
+
+      <!-- selecting primary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ اولیه :</label>
+        <input
+          class="mr-2 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="primaryColor"
+        />
+      </div>
+
+      <!-- selecting secondary color -->
+      <div class="selected-title-contaier flex items-center gap-2">
+        <label for="name">رنگ ثانویه :</label>
+        <input
+          class="mr-1 outline-none border border-slate-300 w-52"
+          type="color"
+          formControlName="secondaryColor"
+        />
+      </div>
+
+      <!-- selecting type -->
+      <div class="type-container">
+        <label for="type">نوع :</label>
+        <select
+          class="cursor-pointer outline-none border border-slate-300 mx-2 px-2 w-52 mr-10"
+          id="name"
+          style="direction: rtl;"
+          name="name"
+          formControlName="type"
+        >
+          <option value="0">لیست (پیشفرض)</option>
+          <option value="1">تصویر</option>
+        </select>
+      </div>
+
+      <!-- errors -->
+      <p *ngIf="fifteenthErrorText" class="text-red-500">
+        خطا ، لطفا مجددا امتحان کنید
+      </p>
+
+      <!-- confirmation -->
+      <button
+        type="menu"
+        class="border-2 border-slate-400 px-4 py-1 hover:text-white hover:bg-slate-400 transition-color duration-200 ease-in-out flex gap-2"
+      >
+        تایید
+        <img
+          class="aspect-square w-6"
+          [src]="'../../../assets/panel/' + fifteenthState + '.png'"
+          *ngIf="fifteenthState"
+        />
+      </button>
+    </details>
+  </form>
+</div>

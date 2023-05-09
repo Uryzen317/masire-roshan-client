@@ -1,0 +1,136 @@
+<div class="h-fit p-4 border-slate-300 border shadow-md mt-4 flex flex-col items-end gap-4">
+  <!-- header -->
+  <p class="text-lg">صفحه شخصی</p>
+  
+  <!-- bio -->
+  <div class="bio-container flex gap-2 w-full">
+    <textarea [formControl]='bio' class="outline-none border border-slate-300 p-2 w-full focus:border-slate-500" id="bio" rows=4></textarea>
+    <label class="w-16 text-right" for="bio">: بیوگرافی</label>
+  </div>
+  
+  <!-- goals -->
+  <div class="goals-container w-full flex flex-col items-end">
+    <div class="flex gap-2 items-center">
+      <button class="border-2 border-slate-400 py-1 px-2 hover:bg-slate-400 hover:text-white transition-color duration-200"
+              (click)="addGoal(goal.value)">افزودن</button>
+      <input #goal class="outline-none border border-slate-300 p-1 focus:border-slate-500 w-40" style="direction: rtl;" placeholder="هدفتان را بنویسید"/>
+      <p class="">: افزودن هدف</p>
+    </div>
+    
+    <div class="flex justify-end items-center gap-2 mt-2">
+      <div class="goals-continer flex flex-wrap gap-2">
+        <div class="goal flex items-center p-1 px-2 rounded-md bg-slate-300 gap-1" *ngFor="let goal of goals">
+          <img src="../../../assets/panel/close.svg" class="w-4" (click)="removeGoal(goal)"/>
+          <p class="text-sm">{{ goal }}</p>
+        </div>
+      </div>
+      
+      <p class="w-18 text-right shrink-0">: لیست اهداف</p>
+    </div>
+  </div>
+  
+  <!-- skills -->
+  <div class="skills container">
+    <div class="flex gap-2 items-center justify-end">
+      <button class="border-2 border-slate-400 py-1 px-2 hover:bg-slate-400 hover:text-white transition-color duration-200"
+              (click)="addSkill(skill.value, value.valueAsNumber)">افزودن</button>
+      <input #value type="number" class="outline-none border border-slate-300 p-1 focus:border-slate-500 w-12" style="direction: rtl;" placeholder="مقدار"/>
+      <input #skill class="outline-none border border-slate-300 p-1 focus:border-slate-500 w-24" style="direction: rtl;" placeholder="عنوان مهارت"/>
+      <p class="">: افزودن مهارت</p>
+    </div>
+    
+    <div class="flex justify-end items-center gap-2 mt-2">
+      <div class="skills-continer flex flex-wrap gap-2">
+        <div class="skill text-sm bg-slate-300 p-1 px-2 rounded-md flex flex-col items-center" *ngFor="let skill of skills">
+          <p>{{ skill.value }}</p>
+          <p>{{ skill.skill }}</p>
+          <img src="../../../assets/panel/close.svg" class="w-4" (click)="removeSkill(skill.skill)"/>
+        </div>
+      </div>
+      
+      <p class="w-18 shrink-0 text-right">: لیست مهارات</p>
+    </div>
+  </div>
+  
+  <!-- achievements -->
+  <div class="achievements-container w-full flex flex-col items-end gap-2">
+    <p class="">: افزودن افتخار</p>
+    
+    <div class="flex justify-end items-center">
+      <input #achievement id="achievement" class="outline-none border border-slate-300 p-1 focus:border-slate-500" style="direction: rtl;"/>
+      <label class="ml-2" for="achievement">: عنوان</label>
+    </div>
+    
+    <p class="">: تصویر</p>
+    <div class="border border-slate-300 flex w-full snap-x overflow-x-auto overflow-y-hidden">
+      <img *ngFor="let x of images" [src]="'../../../assets/users/badges/'+ x + '.png'" class="w-16 snap-start cursor-pointer
+           hover:bg-slate-300 transition-color duration-100" [class.bg-slate-300]='activeAchievement == x' (click)='activeAchievement=x'/>      
+    
+    <!-- 
+    <img [src]="'../../../assets/users/bg-left-' + bgImage + '.jpg'" class="aspect-video rounded-md 
+            " *ngFor='let bgImage of bgImages' [class.-translate-y-1]='activeBg == bgImage' (click)='activeBg = bgImage'/>
+    -->
+    </div>
+    
+    <button class="border-2 border-slate-400 py-1 px-2 hover:bg-slate-400 hover:text-white transition-color duration-200"
+            (click)="addAchievement(achievement.value)">افزودن</button>
+  </div>
+  
+  <div class="flex justify-end items-center gap-2 mt-2">
+    <div class="achievemts-continer flex flex-wrap gap-2">
+      <div class="acihevement text-sm bg-slate-300 p-1 px-2 rounded-md text-center flex flex-col items-center" *ngFor="let achievement of achievements">
+        <img [src]="'../../../assets/users/badges/' + achievement.avatar + '.png'" class="w-14 h-14 snap-center first:bg-slate-300 cursor-pointer"/>      
+        <p>{{ achievement.achievement }}</p>
+        <img src="../../../assets/panel/close.svg" class="w-6" (click)="removeAchievement(achievement.achievement)"/>
+      </div>
+    </div>
+    
+    <p class="w-18 shrink-0 text-right">: لیست افتخارات</p>
+  </div>
+  
+  <!-- call info -->
+  <div class="call-info-container w-full flex flex-col items-end gap-2">
+    <p>راه های ارتباطی</p>
+  
+    <div class="flex justify-end items-center">
+      <input #telegram id="telegram" class="outline-none border border-slate-300 p-1 focus:border-slate-500" style="direction: rtl;"
+             [value]='callInfo[0] ? callInfo[0].value : ""'/>
+      <label class="ml-2" for="telegram">: تلگرام</label>
+    </div>
+    <div class="flex justify-end items-center">
+      <input #instagram id="instagram" class="outline-none border border-slate-300 p-1 focus:border-slate-500" style="direction: rtl;"
+             [value]='callInfo[1] ? callInfo[1].value : ""'/>
+      <label class="ml-2" for="instagram">: اینستاگرام</label>
+    </div>
+    <div class="flex justify-end items-center">
+      <input #email id="email" class="outline-none border border-slate-300 p-1 focus:border-slate-500" style="direction: rtl;"
+             [value]='callInfo[2] ? callInfo[2].value : ""'/>
+      <label class="ml-2" for="email">: ایمیل</label>
+    </div>
+    
+    <button class="border-2 border-slate-400 py-1 px-2 hover:bg-slate-400 hover:text-white transition-color duration-200"
+            (click)="callInfo=[
+              {platform: 'telegram',     value: telegram.value},
+              {platform: 'instagram',    value: instagram.value},
+              {platform: 'email',        value: email.value},
+            ]">تنظیم</button>
+  </div>
+  
+  <!-- background -->
+  <div class="background-selection-container w-full flex flex-col items-end gap-2">
+    <p>: تصویر پس زمینه</p>
+    
+    <div class="scrollbar flex w-full gap-2 overflow-x-auto overflow-y-hidden py-2 snap-x">
+      <img [src]="'../../../assets/users/bg-left-' + bgImage + '.jpg'" class="w-36 aspect-video rounded-md snap-start transition-all hover:-translate-y-1
+            duration-50 cursor-pointer" *ngFor='let bgImage of bgImages' [class.-translate-y-1]='activeBg == bgImage' (click)='activeBg = bgImage'/>
+    </div>
+  </div>
+  
+  <!-- filnalize -->
+  <button class="border-2 border-slate-400 py-1 px-2 hover:bg-slate-400 hover:text-white transition-color duration-200" 
+          (click)="submit()">بروز رسانی</button> 
+          
+  <!-- show -->
+  <a class="border-2 border-slate-400 py-1 px-2 hover:bg-slate-400 hover:text-white transition-color duration-200" 
+            [routerLink]="['/', 'users', 'info', id]">نمایش</a> 
+</div>

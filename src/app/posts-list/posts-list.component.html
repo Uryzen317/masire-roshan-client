@@ -1,0 +1,116 @@
+<div class="main-container flex flex-col items-center">
+  <div class="inner-container container min-h-screen bg-white my-4 p-4">
+    <div
+      class="wallpapers-container gap-8 sm:gap-8 md:gap-8 flex flex-wrap justify-center sm:justify-start"
+    >
+      <a
+        class="wallpaper w-72 h-60 sm:w-68 sm:h-56 md:w-56 md:h-48 bg-white border cursor-pointer hover:shadow-lg transition-all duration-100 ease-in"
+        *ngFor="let post of posts; index as index"
+        [routerLink]="['/', 'post', name, post._id]"
+      >
+        <div
+          class="w-full aspect-video bg-cover bg-no-repeat"
+          [style.backgroundImage]="
+            'url(' + environment.cdnServer + post.smallAvatar + ')'
+          "
+        ></div>
+        <p class="text-lg p-1">{{ post.name }}</p>
+
+        <!-- details -->
+        <div
+          class="details-container justify-end text-zinc-900 flex-wrap items-center flex"
+        >
+          <img
+            class="w-4 h-4"
+            src="../../assets/game-section/desktop.svg"
+            *ngIf="post.isDesktop"
+          />
+          <img
+            class="w-4 h-4"
+            src="../../assets/game-section/phone.svg"
+            *ngIf="post.isMobile"
+          />
+
+          <div class="author border-l-2 border-white pl-1 flex items-center">
+            <p class="text-sm translate-y-[2px] pr-1">{{ post.comments }}</p>
+            <img class="w-4 h-4" src="../../assets/game-section/answer.svg" />
+          </div>
+          <div class="author border-l-2 border-white pl-1 flex items-center">
+            <p class="text-sm translate-y-[2px]">{{ post.downloads }}</p>
+            <img
+              class="w-4 h-4"
+              src="../../assets/game-section/downloads.svg"
+            />
+          </div>
+          <div class="author border-l-2 border-white pl-1 flex items-center">
+            <p class="text-sm translate-y-[2px]">{{ post.rating }} / 5</p>
+            <img class="w-4 h-4" src="../../assets/game-section/likes.svg" />
+          </div>
+          <div class="author border-l-2 border-white pl-1 flex items-center">
+            <p class="text-sm">{{ post.copyrightText }}</p>
+            <img class="w-4 h-4" src="../../assets/game-section/public.svg" />
+          </div>
+          <div
+            class="author border-l-2 border-white pl-1 flex items-center"
+          ></div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- page counter -->
+  <div class="page-nav flex justify-center gap-2 mb-4">
+    <div
+      class="prev bg-white w-6 h-8 border shadow-md cursor-pointer border-slate-300 rounded-sm flex items-center justify-center"
+      *ngIf="page - 1 > 0"
+      [routerLink]="['../', page - 2]"
+    >
+      {{ page - 1 }}
+    </div>
+    <div
+      class="prev bg-white w-6 h-8 border shadow-md cursor-pointer border-slate-300 rounded-sm flex items-center justify-center"
+      *ngIf="page > 0"
+      [routerLink]="['../', page - 1]"
+    >
+      {{ page }}
+    </div>
+    <div
+      class="back bg-white w-6 h-8 border shadow-md cursor-pointer border-slate-300 rounded-sm flex items-center justify-center"
+      *ngIf="page > 0"
+      [routerLink]="['../', page - 1]"
+    >
+      <img
+        class="w-4 translate-x-1"
+        src="../../assets/game-section/back.png"
+        alt=""
+      />
+    </div>
+    <div
+      class="current -translate-y-1 bg-white w-6 h-8 border shadow-md cursor-pointer border-slate-300 rounded-sm flex items-center justify-center"
+      *ngIf="page + 1 > 0"
+    >
+      {{ page + 1 }}
+    </div>
+    <div
+      class="forw bg-white w-6 h-8 border shadow-md cursor-pointer border-slate-300 rounded-sm flex items-center justify-center"
+      *ngIf="count / limit > page + 1"
+      [routerLink]="['../', page + 1]"
+    >
+      <img class="w-4" src="../../assets/game-section/next.png" alt="" />
+    </div>
+    <div
+      class="next bg-white w-6 h-8 border shadow-md cursor-pointer border-slate-300 rounded-sm flex items-center justify-center"
+      *ngIf="count / limit > page + 1"
+      [routerLink]="['../', page + 1]"
+    >
+      {{ page + 2 }}
+    </div>
+    <div
+      class="next bg-white w-6 h-8 border shadow-md cursor-pointer border-slate-300 rounded-sm flex items-center justify-center"
+      *ngIf="count / limit > page + 2"
+      [routerLink]="['../', page + 2]"
+    >
+      {{ page + 3 }}
+    </div>
+  </div>
+</div>

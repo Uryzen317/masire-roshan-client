@@ -1,0 +1,63 @@
+<div class="main-container flex flex-col items-center">
+  <div class="inner-container container min-h-screen bg-white my-4 p-4">
+    <div
+      class="wallpapers-container allpapers-container gap-8 sm:gap-8 md:gap-8 flex flex-wrap justify-center sm:justify-start"
+    >
+      <div
+        class="wallpaper-inner-contaienr w-72 h-60 sm:w-68 sm:h-56 md:w-56 md:h-48 bg-white border cursor-pointer hover:shadow-lg transition-all duration-100 ease-in relative"
+        *ngFor="let post of posts; index as index"
+      >
+        <div
+          class="bg-white w-8 h-8 flex items-center justify-center absolute top-0 left-0"
+          (click)="remove(post._id)"
+        >
+          <img class="w-6 h-6" src="../../../assets/panel/delete.png" />
+        </div>
+        <a class="wallpaper" [routerLink]="['/', 'post', post._id]">
+          <div
+            class="w-full aspect-video bg-cover bg-no-repeat"
+            [style.backgroundImage]="
+              'url(' + environment.cdnServer + post.smallAvatar + ')'
+            "
+          ></div>
+          <p class="text-lg p-1">#{{ index + 1 }}</p>
+
+          <!-- details -->
+          <div
+            class="details-container justify-end text-zinc-900 flex-wrap px-1 items-center flex"
+          >
+            <img
+              class="w-4 h-4"
+              src="../../assets/game-section/desktop.svg"
+              *ngIf="post.isDesktop"
+            />
+            <img
+              class="w-4 h-4"
+              src="../../assets/game-section/phone.svg"
+              *ngIf="post.isMobile"
+            />
+
+            <div class="author border-l-2 border-white pl-1 flex items-center">
+              <p class="text-sm translate-y-[2px]">{{ post.downloads }}</p>
+              <img
+                class="w-4 h-4"
+                src="../../assets/game-section/downloads.svg"
+              />
+            </div>
+            <div class="author border-l-2 border-white pl-1 flex items-center">
+              <p class="text-sm translate-y-[2px]">{{ post.rating }} / 5</p>
+              <img class="w-4 h-4" src="../../assets/game-section/likes.svg" />
+            </div>
+            <div class="author border-l-2 border-white pl-1 flex items-center">
+              <p class="text-sm">{{ post.copyrightText }}</p>
+              <img class="w-4 h-4" src="../../assets/game-section/public.svg" />
+            </div>
+            <div
+              class="author border-l-2 border-white pl-1 flex items-center"
+            ></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+/* You can add global styles to this file, and also import other style files */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background-color: #e5e7eb;
+}
+
+* {
+  font-family: "Baloo Bhaijaan 2", cursive;
+  
+}
+
+*::selection {
+  background-color : #22c55e;
+  color : white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+::-webkit-scrollbar-thumb {
+  background: #22c55e;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #16a34a;
+}
+
+::-webkit-scrollbar-corner {
+  background: #22c55e;
+}

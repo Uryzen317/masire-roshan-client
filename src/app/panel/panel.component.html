@@ -1,0 +1,113 @@
+<!-- managing the modals -->
+<app-edit-modal
+  *ngIf="modalType"
+  [(type)]="modalType"
+  [data]="data"
+></app-edit-modal>
+
+<!-- panel itself -->
+<div class="main-container flex justify-center">
+  <div
+    class="panel-container container flex flex-wrap md:flex-nowrap gap-4 my-4"
+  >
+    <!-- main data -->
+    <div
+      class="left-panel bg-white basis-full md:basis-4/5 min-h-screen shadow-md p-4 order-1 md:order-none"
+      *ngIf="regState"
+    >
+      <app-personal-account
+        *ngIf="operation === 0"
+        (showModal)="modalType = $event.type; data = $event.data"
+      ></app-personal-account>
+      <app-posts *ngIf="operation === 1"></app-posts>
+      <app-games *ngIf="operation === 2"></app-games>
+      <app-tags *ngIf="operation === 3"></app-tags>
+      <app-main-page *ngIf="operation === 4"></app-main-page>
+      <app-logs *ngIf="operation === 5"></app-logs>
+      <app-admins *ngIf="operation === 6"></app-admins>
+    </div>
+
+
+    <!-- navigation -->
+    <div
+      class="right-panel bg-white hidden md:block md:basis-1/5 h-fit md:sticky md:top-[72px] shadow-md"
+    >
+      <!-- managing account -->
+      <a [routerLink]="['..', 'personal-account']">
+        <div
+          class="account-info hover:bg-zinc-200 flex justify-end p-2 gap-1 h-fit items-center cursor-pointer"
+          [class.bg-zinc-200]="operation === 0"
+        >
+          <p class="text-slate-800">حساب کاربری</p>
+          <img class="h-6" src="../../assets/game-section/account-info.png" />
+        </div>
+      </a>
+
+      <!-- manage posts -->
+      <a *ngIf="regState ==='admin' || regState ==='god'" [routerLink]="['..', 'posts']">
+        <div
+          class="account-info hover:bg-zinc-200 flex justify-end p-2 gap-1 h-fit items-center cursor-pointer"
+          [class.bg-zinc-200]="operation === 1"
+        >
+          <p class="text-slate-800">مدیریت پست ها</p>
+          <img class="h-6" src="../../assets/panel/posts.png" />
+        </div>
+      </a>
+
+      <!-- manage subjects -->
+      <a *ngIf="regState==='admin' || regState==='god'" [routerLink]="['..', 'games']">
+        <div
+          class="account-info hover:bg-zinc-200 flex justify-end p-2 gap-1 h-fit items-center cursor-pointer"
+          [class.bg-zinc-200]="operation === 2"
+        >
+          <p class="text-slate-800">مدیریت عناوین</p>
+          <img class="h-6" src="../../assets/panel/document.png" />
+        </div>
+      </a>
+
+      <!-- manage tags -->
+      <a *ngIf="regState==='admin' || regState==='god'" [routerLink]="['..', 'tags']">
+        <div
+          class="account-info hover:bg-zinc-200 flex justify-end p-2 gap-1 h-fit items-center cursor-pointer"
+          [class.bg-zinc-200]="operation === 3"
+        >
+          <p class="text-slate-800">مدیریت تگها</p>
+          <img class="h-6" src="../../assets/panel/tags.png" />
+        </div>
+      </a>
+
+      <!-- manage main page -->
+      <a *ngIf="regState==='admin' || regState==='god'" [routerLink]="['..', 'main-page']">
+        <div
+          class="account-info hover:bg-zinc-200 flex justify-end p-2 gap-1 h-fit items-center cursor-pointer"
+          [class.bg-zinc-200]="operation === 4"
+        >
+          <p class="text-slate-800">صفحه اصلی</p>
+          <img class="h-6" src="../../assets/panel/home.png" />
+        </div>
+      </a>
+
+      <!-- manage logs -->
+      <a *ngIf="regState==='admin' || regState==='god'" [routerLink]="['..', 'logs']">
+        <div
+          class="account-info hover:bg-zinc-200 flex justify-end p-2 gap-1 h-fit items-center cursor-pointer"
+          [class.bg-zinc-200]="operation === 5"
+        >
+          <p class="text-slate-800">فعالیت ها</p>
+          <img class="h-6" src="../../assets/panel/logs.png" />
+        </div>
+      </a>
+
+      <!-- manage admins -->
+      <a *ngIf="regState==='god'" [routerLink]="['..', 'admins']">
+        <div
+          class="account-info hover:bg-zinc-200 flex justify-end p-2 gap-1 h-fit items-center cursor-pointer"
+          [class.bg-zinc-200]="operation === 6"
+        >
+          <p class="text-slate-800">مدیران</p>
+          <img class="h-6" src="../../assets/panel/admins.png" />
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
